@@ -22,7 +22,7 @@ public class Menu {
         System.out.print(">>> ");
         opt = scan.nextInt();
         while (opt<min || opt>max){
-            System.out.print("Input salah, Ulangi!\n");
+            System.out.println("Masukkan salah, input menu "+ min + " sampai "+max);
             System.out.print(">>> ");
             opt = scan.nextInt();
         }
