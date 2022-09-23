@@ -71,7 +71,7 @@ public class Matrix {
         // Menampilkan matriks ke layar
         for (int i=0;i<nBaris(m);i++){
             for (int j=0;j<nKolom(m);j++){
-                System.out.print(m[i][j]+" ");
+                System.out.print(m[i][j]+ " ");
             }
             System.out.println();
         }
@@ -95,5 +95,17 @@ public class Matrix {
             m[idxRow1][i] -= m[idxRow2][i]*x;
         }
         return m;
+    }
+
+    public static boolean isZero(double x){
+        double epsilon = 1.0e-12;
+        return ((x<epsilon) && (x>-epsilon));
+    }
+
+    public static boolean isRowZero(double[][] m, int i){
+        for (int j=0; j<nKolom(m); j++){
+            if (!isZero(m[i][j])) return false;
+        }
+        return true;
     }
 }
