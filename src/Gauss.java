@@ -4,22 +4,31 @@ public class Gauss extends Matrix{
 
     public static void main(String[] args){
         double[][] m;
-        int[] a = new int[]{-1,-1};
+        double[] spl;
+        int[] a = new int[]{0,-1};
         int[] b;
         m = bacaMatrix();
         // m = eselonBaris(m);
         System.out.println();
         tulisMatrix(m);
-        b = nextPivot(m, a);
-        System.out.println(Arrays.toString(b));
-        m = eselonBaris(m);
+        // m = eselonBaris(m);
+        // tulisMatrix(m);
+        // spl = SPLSolver.splUniqueSol(m);
+        // System.out.println(Arrays.toString(spl));
+        m = Gauss_Jordan.eselonBarisTereduksi(eselonBaris(m));
+        System.out.println();
         tulisMatrix(m);
+        System.out.println();
+        // b = idxLeadingOne(m, a);
+        // System.out.println(Arrays.toString(b));
+        // if (isRowZero(m,2)) System.out.println("zero");
+        SPLSolver.splSolution(m);
     }
     public static double[][] eselonBaris(double[][] m){
         int [] pivot = new int[] {-1,-1};
 
         for (int i = 0; i < nBaris(m); i++){
-            pivot = nextPivot(m,pivot);
+            pivot = idxLeadingOne(m,pivot);
 
             // Elemen setelah pivot semuanya 0
             if (pivot[0]==-1&&pivot[1]==-1){
@@ -45,7 +54,8 @@ public class Gauss extends Matrix{
         }
         return m;
     }
-    public static int[] nextPivot (double[][] m, int[] pivot){
+    public static int[] idxLeadingOne (double[][] m, int[] pivot){
+        // Mengembalikan index elemen yang akan menjadi satu utama berikutnya
         int [] idx = new int[] {-1,-1};
         for (int j = pivot[1]+1; j<nKolom(m);j++){
             for (int i = pivot[0]+1; i<nBaris(m);i++){
@@ -58,5 +68,28 @@ public class Gauss extends Matrix{
         }
         return idx;
     }
+
+    // public static void splSolution (double[][]m){
+    //     double [] spl = new double[nKolom(m)-1];
+    //     if (nKolom(m)-1 == nBaris(m)){
+    //         spl = splUniqueSol(m);
+    //         for (int i=0; i<nKolom(m)-1;i++){
+    //             System.out.println("X"+i+": "+spl[i]);
+    //         }
+    //     } 
+
+
+    // }
+    
+
+    // public static int whatSolution (double[][] m){
+    //     // Jika jumlah persamaan lebih sedikit dari jumlah variabel
+    //     if ((nBaris(m) < nKolom(m)-1) || isRowZero(m, nBaris(m)-1)) return 2;
+        
+
+    //             }
+    //         }
+    //     }
+    // }
 
 }
