@@ -3,7 +3,7 @@ public class Determinan extends Matrix {
         // Menghasilkan elemen matriks kofaktor [row][col]
         // Prekondisi m persegi
         double[][] mCof;
-        mCof = createMatrix(nBaris(m), nKolom(m));
+        mCof = createMatrix(nBaris(m)-1, nKolom(m)-1);
 
         for (int i=0; i<nBaris(m); i++){
             for (int j=0; j<nKolom(m); j++){
@@ -47,17 +47,23 @@ public class Determinan extends Matrix {
     }
     public static double determinan(double[][] m) {
         // Menerima masukkan matriks dan mengihutung determianannya menggunakan cofaktor
-        m = noAugmented(m);
+        // Det = A01C01 + A02C02 + ... + A0nC0n
+        if (nBaris(m) != nKolom(m)) {
+            // mengubah matriks augmented menjadi matriks persegi
+            m = AugmentedtoSquare(m);
+        }
         double det = 0;
         if (m.length == 1) {
             det = m[0][0];
         } else {
             double [][] mElmtCof;
-            int sign = 1;
-            for (int i=0; i<m.length; i++){
+            int sign;
+            for (int i=0; i<nKolom(m); i++){
+                if (i%2==0) sign = 1;
+                else sign = -1;
+
                 mElmtCof = ElmtCofactor(m, 0, i);
                 det += sign*m[0][i]*determinan(mElmtCof);
-                sign *= (-1);
             }
         }
         return det;

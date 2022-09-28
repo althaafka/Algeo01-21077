@@ -5,22 +5,25 @@ public class Matrix {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args){
-        double[][] m,m2;
+        double[][] m1;
         // m = createMatrix(3, 7);
         // System.out.println(nBaris(m));
         // System.out.println(nKolom(m));
-        m2 = bacaMatrix();
-        tulisMatrix(m2);
+        m1 = bacaMatrix();
+        tulisMatrix(m1);
         System.out.println();
+        System.out.println("hasil " + Determinan.determinan(m1));
+        m1 = Invers.InversCofactor(m1);
+        tulisMatrix(m1);
         // m2 = swapBaris(m2, 1, 0);
         // System.out.println();
         // tulisMatrix(m2);
         // m2 = kaliBaris(m2, 2, 10);
         // System.out.println();
         // tulisMatrix(m2);
-        m2 = barisKurangNBaris(m2, 1, 0, 5);
-        System.out.println();
-        tulisMatrix(m2);
+        // m2 = barisKurangNBaris(m2, 1, 0, 5);
+        // System.out.println();
+        // tulisMatrix(m2);
 
     }
 
@@ -108,7 +111,7 @@ public class Matrix {
         }
         return true;
     }
-    public static double[][] noAugmented(double[][] m){
+    public static double[][] AugmentedtoSquare(double[][] m){
         // Mengubah matriks augmented menjadi matriks persegi
         double[][] SquareMat = createMatrix(nBaris(m), nKolom(m)-1);
         for (int i = 0; i < nBaris(SquareMat); i++) {
