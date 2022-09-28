@@ -15,6 +15,7 @@ public class Matrix {
         System.out.println("hasil " + Determinan.determinan(m1));
         m1 = Invers.InversCofactor(m1);
         tulisMatrix(m1);
+        tulisMatrix(SolusiBalikan.SolveBalikan(m1));
         // m2 = swapBaris(m2, 1, 0);
         // System.out.println();
         // tulisMatrix(m2);
