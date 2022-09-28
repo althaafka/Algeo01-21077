@@ -5,9 +5,12 @@ public class Bicubic extends Matrix{
     public static void main(String[] args){
         double[][] m;
         m = bacaMatrix();
-        // tulisMatrix(m);
-        // System.out.println();
-        bicubic(m,1,3);
+        tulisMatrix(m);
+        System.out.println();
+        System.out.println("Coba Invers dari bicubic");
+        m = Invers.InversCofactor(m);
+        tulisMatrix(m);
+        // bicubic(m,1,3);
         
     }
 

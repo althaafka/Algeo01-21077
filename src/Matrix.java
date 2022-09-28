@@ -5,7 +5,8 @@ public class Matrix {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args){
-        double[][] m1, res, mInt;
+        double[][] m1;
+
         // m = createMatrix(3, 7);
         // System.out.println(nBaris(m));
         // System.out.println(nKolom(m));
