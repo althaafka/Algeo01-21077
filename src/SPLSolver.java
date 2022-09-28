@@ -168,6 +168,29 @@ public class SPLSolver extends Matrix {
         
 
         tulisMatrix(result);
+        char var = 's';
+        String plus = "+";
+        String min = "-";
+        for (int i = 0; i<nBaris(result); i++){
+            for (int j=0; j<nKolom(result); j++){
+                if (!isZero(result[i][j])){
+                    if (j==0){
+                        
+                        System.out.print("X"+(i+1)+" = "+result[i][j]+ Character.toString((char)((int)(var+j))));
+                    } else if (j==nKolom(result)-1){
+                        if (!isZero(result[i][j])){
+                            System.out.print(" + "+ result[i][j]);
+                        }
+                    } else{
+                        if (result[i][j]==1){
+                            System.out.print(" "+ Character.toString((char)((int)(var+j))));
+                        }
+                        System.out.print(" "+result[i][j]+ Character.toString((char)((int)(var+j))));
+                    }
+                }
+            }
+            System.out.print(", ");
+        }
             // int idxVar=0;
             // idxPar=0;
             // idxLeading1 = new int[] {-1,-1};
@@ -186,6 +209,7 @@ public class SPLSolver extends Matrix {
             // }
         }
 
+        
     }
 
 
