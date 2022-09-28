@@ -5,17 +5,11 @@ public class Matrix {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args){
-        double[][] m1;
+        double[][] m1, res, mInt;
         // m = createMatrix(3, 7);
         // System.out.println(nBaris(m));
         // System.out.println(nKolom(m));
-        m1 = bacaMatrix();
-        tulisMatrix(m1);
-        System.out.println();
-        System.out.println("hasil " + Determinan.determinan(m1));
-        m1 = Invers.InversCofactor(m1);
-        tulisMatrix(m1);
-        tulisMatrix(SolusiBalikan.SolveBalikan(m1));
+
         // m2 = swapBaris(m2, 1, 0);
         // System.out.println();
         // tulisMatrix(m2);
@@ -124,7 +118,7 @@ public class Matrix {
     }
     public static double[][] transpose(double[][] m){
         // Transpose Matriks;
-        double[][] mTranspose = createMatrix(nBaris(m), nKolom(m));
+        double[][] mTranspose = createMatrix(nKolom(m), nBaris(m));
         for (int i=0; i<nBaris(mTranspose); i++){
             for (int j=0; j<nKolom(mTranspose); j++){
                 mTranspose[i][j] = m[j][i];

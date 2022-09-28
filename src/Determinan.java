@@ -1,7 +1,13 @@
 public class Determinan extends Matrix {
+    public static void main(String[] args){
+        double[][] m1;
+        m1 = bacaMatrix();
+        tulisMatrix(m1);
+        System.out.println("hasil " + Determinan.determinan(m1));
+    }
     public static double[][] ElmtCofactor (double[][] m, int row, int col){
         // Menghasilkan elemen matriks kofaktor [row][col]
-        // Prekondisi m persegi
+        // Prekondisi m persegi dan nBaris > 1 nKolom > 1
         double[][] mCof;
         mCof = createMatrix(nBaris(m)-1, nKolom(m)-1);
 
@@ -55,7 +61,7 @@ public class Determinan extends Matrix {
         double det = 0;
         if (m.length == 1) {
             det = m[0][0];
-        } else {
+        } else if (m.length>1){
             double [][] mElmtCof;
             int sign;
             for (int i=0; i<nKolom(m); i++){
