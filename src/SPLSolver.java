@@ -32,15 +32,16 @@ public class SPLSolver extends Matrix {
         switch (solution){
             case 1: 
                 double[] result = splUniqueSol(m);
-                System.out.println("unik");
+                System.out.println("SPL Memiliki Solusi Unik");
                 displayUniqueSol(result);
                 break;
             case 2:
-                System.out.println("tak hingga");
-                splInfiniteSol(m);
+                System.out.println("SPL Memiliki Solusi Tak Hingga");
+                double[][] infresult =  splInfiniteSol(m);
+                displayInfiniteSol(infresult);
                 break;
             case 3:
-                System.out.println("no solution");
+                System.out.println("SPL Tidak Memiliki Solusi");
                 break;
 
         }
@@ -68,33 +69,7 @@ public class SPLSolver extends Matrix {
         }
     }
 
-    // public static void splInfiniteSol(double[][] m){
-    //     String[] result = new String [nKolom(m)-1];
-    //     char[] var = new char [nKolom(m)-1];
-    //     int[] idxLeading1 = new int[] {-1,-1};
-    //     char firstVar = 's';
-    //     for (int j=0;j<nKolom(m)-1;j++){
-    //         result[j]="";
-    //     }
-    //     m = Gauss_Jordan.eselonBarisTereduksi(m);
-    //     for (int j=0; j<nKolom(m)-1;j++){
-    //         idxLeading1 = Gauss.idxLeadingOne(m, idxLeading1);
-    //         if (idxLeading1[1]!=j){
-    //             var[j]= (char)((int)firstVar+j);
-    //             result[j] = Character.toString(var[j]);
-    //         }
-    //     }
-    //     idxLeading1 = new int[] {-1,-1};
-    //     for (int i=nBaris(m)-1; i<=0; i++){
-    //         idxLeading1 = Gauss.idxLeadingOne(m,idxLeading1);
-    //         result[0]= Double.toString(m[i][nKolom(m)-1]);
-    //         for(int j=0; i<nKolom(m)-1; j++){
-    //             if(!isZero(m[i][j]) && result[j]!=""){
-    //                 result[j]+= result
-    //             }
-    //         }
-    //     }
-    public static void splInfiniteSol(double[][] m){
+    public static double[][] splInfiniteSol(double[][] m){
         m = Gauss_Jordan.eselonBarisTereduksi(m);
         double[][] result;
         int[] idxLeading1 = new int[] {-1,-1};
@@ -137,11 +112,8 @@ public class SPLSolver extends Matrix {
                 idxLeading1 = idxLeading1Temp;
             }
         }
-        tulisMatrix(result);
+
         // Mengisi matrix result
-
-
-
         int idxVar = 0;
         double[] arrTemp = new double[result[0].length];
         idxLeading1 = new int[] {-1,-1};
@@ -158,65 +130,41 @@ public class SPLSolver extends Matrix {
                         for (int l = 0; l <result[j].length; l++){
                             result[idxVar][l]+= arrTemp[l];
                         }
-
-                        // result[idxVar] = addArr(result[idxVar],multiplyArr(result[j],m[i][j]));
-                        tulisMatrix(result);
-                        System.out.println();
                     } else if (j==nKolom(m)-1){
                         result[idxVar][nKolom(result)-1] = m[i][j];
                     }
 
                     }
-
-                        // if (j==nKolom(m)-1) {
-                        //     result[idxVar][nKolom(result)-1] = m[i][j];
-                        // }
                 }
             }
+        return result;
+        }
         
-
-        tulisMatrix(result);
-        char var = 's';
-        String plus = "+";
-        String min = "-";
-        for (int i = 0; i<nBaris(result); i++){
-            for (int j=0; j<nKolom(result); j++){
-                if (!isZero(result[i][j])){
-                    if (j==0){
-                        
-                        System.out.print("X"+(i+1)+" = "+result[i][j]+ Character.toString((char)((int)(var+j))));
-                    } else if (j==nKolom(result)-1){
-                        if (!isZero(result[i][j])){
-                            System.out.print(" + "+ result[i][j]);
+        public static void displayInfiniteSol(double[][] result){
+            char var = 's';
+            boolean first;
+            for (int i=0; i<nBaris(result); i++){
+                System.out.print("X"+(i+1)+ " = ");
+                first = true;
+                for (int j=0; j<nKolom(result); j++){
+                    if (!isZero(result[i][j])){
+                        if (j==0){
+                            System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
+                            first = false;
+                        } else if (j==nKolom(result)-1){
+                            if (!first) System.out.print(" + ");
+                            System.out.print(result[i][j]);
+                            first = false;
+                        } else{
+                            if (!first) System.out.print(" + ");
+                            System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
+                            first = false;
                         }
-                    } else{
-                        if (result[i][j]==1){
-                            System.out.print(" "+ Character.toString((char)((int)(var+j))));
-                        }
-                        System.out.print(" "+result[i][j]+ Character.toString((char)((int)(var+j))));
                     }
                 }
+                System.out.println();
             }
-            System.out.print(", ");
         }
-            // int idxVar=0;
-            // idxPar=0;
-            // idxLeading1 = new int[] {-1,-1};
-            // for (int i=nBaris(m)-1;i>=0;i--){
-            //     if (!isRowZero(m,i)){
-            //         idxLeading1[0]=i;
-            //         idxLeading1 = Gauss.idxLeadingOne(m,idxLeading1);
-            //         idxVar = idxLeading1[1];
-            //         for (int j = idxLeading1[1]+1; j<nKolom(m);j++){
-            //             result[idxVar][idxPar]
-            //         }
-            //     }
-            //     idxLeading1 = Gauss.idxLeadingOne(m,idxLeading1);
-            //     if (idxLeading1[0]== -1 && idxLeading1[1]==-1){
-            //     }
-            // }
-        }
-
         
     }
 

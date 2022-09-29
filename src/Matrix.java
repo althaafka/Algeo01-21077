@@ -105,7 +105,8 @@ public class Matrix {
         // Menampilkan matriks ke layar
         for (int i=0;i<nBaris(m);i++){
             for (int j=0;j<nKolom(m);j++){
-                System.out.print(m[i][j]+ " ");
+                System.out.printf("%02f",m[i][j]);
+                System.out.print(" ");
             }
             System.out.println();
         }
@@ -141,6 +142,27 @@ public class Matrix {
             if (!isZero(m[i][j])) return false;
         }
         return true;
+    }
+    public static double[][] kaliMatriks (double[][] m1, double[][] m2){
+        // Prekondisi nKolom(m1) = nBaris(mat2)
+        double[][] mKali = createMatrix(nBaris(m1), nKolom(m2));
+
+        for (int i = 0; i < nBaris(mKali); i++) {
+            for (int j = 0; j < nKolom(mKali); j++) {
+                mKali[i][j] = 0;
+                for (int k = 0; k < nKolom(m1); k++) {
+                    mKali[i][j] += m1[i][k] * m2[k][j];
+                }
+            }
+        }
+        return mKali;
+    }
+
+    public static double turnToZero(double x){
+        if (isZero(x)){
+            return 0;
+        }
+        return x;
     }
 }
 

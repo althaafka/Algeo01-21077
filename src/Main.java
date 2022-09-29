@@ -13,9 +13,11 @@ class Main extends Menu{
                     case 1: //input keyboard
                         m = Matrix.bacaMatrix();
                         break;
-                    case 2: 
+                    case 2: //input file
+                        String fileName;
                         System.out.println("input file belum jadii");
-                        m = Matrix.bacaMatrix();
+                        fileName = File.inputFileName();
+                        m = File.fileMatrix(fileName);
                         break;
                     default:
                         m = Matrix.bacaMatrix();

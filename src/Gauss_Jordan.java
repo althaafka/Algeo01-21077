@@ -56,7 +56,6 @@ public class Gauss_Jordan extends Matrix{
             for (int k = pivot[0]+1; k<nBaris(m);k++){
                 if (!isZero(m[k][pivot[1]])){
                     m = barisKurangNBaris(m, k, pivot[0], m[k][pivot[1]]);
-                    tulisMatrix(m);
                 }
             }
         }
@@ -67,16 +66,12 @@ public class Gauss_Jordan extends Matrix{
         m = Gauss.eselonBaris(m);
         for(int i=0; i< nBaris(m); i++){
             pivot = nextPivot(m,pivot);
-            System.out.println(Arrays.toString(pivot));
             if (pivot[0]==-1 && pivot[1]==-1){
                 return m;
             }
             for (int k = pivot[0]-1; k>=0;k--){
-                System.out.println(i +"   "+k);
                 if (!isZero(m[k][pivot[1]])){
-                    System.out.println(i +"   "+k);
                     m = barisKurangNBaris(m,k,pivot[0],m[k][pivot[1]]);
-                    tulisMatrix(m);
                 }
             }
         }

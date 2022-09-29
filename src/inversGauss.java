@@ -1,68 +1,52 @@
 
-public class inversGauss extends Gauss_Jordan {
+public class inversGauss extends Matrix {
 
-   public static void main(String[] args) 
-   {
-        double[][] m, midentitas,m1,m2;
-        int i,j;
-        m = createMatrix(10, 10);
-        System.out.println(nBaris(m));
-        System.out.println(nKolom(m));
-        m = bacaMatrix();
-        m1 = createMatrix(nBaris(m),(2*nKolom(m)));
-        m2 = createMatrix(nBaris(m), nKolom(m));
+    public static void main(String[] args){
+        double[][] m1,m2;
+        String fileName;
+        System.out.println("input file belum jadii");
+        fileName = File.inputFileName();
+        m1 = File.fileMatrix(fileName);
+        // m1 = bacaMatrix();
+        m2 = InversGauss(m1);
+        tulisMatrix(m2);
 
-        //Buat Matriks identitasnya 
+
+    }
+
+    public static double[][] InversGauss(double[][] m){
+        double[][] midentitas,m1,m2;
+
+        //Matriks Identitas
         midentitas = createMatrix(nBaris(m),nKolom(m));
+        for(int i = 0; i<nBaris(m);i++){
+            for(int j = 0; j < nKolom(m); j++){
+                if (i == j) midentitas[i][j] = 1;
+                else midentitas[i][j] = 0;
+            }
+        }
 
-        for(i = 0; i<nBaris(m);i++)
-        {
-            for(j = 0; j < nKolom(m); j++)
-            {
-                if(i == j)
-                {
-                    midentitas[i][j] = 1;
-                }
-
-                else 
-                {
-                    midentitas[i][j] = 0;
-                }
+        m1 = createMatrix(nBaris(m), 2*nKolom(m));
+        for(int i = 0; i<nBaris(m1);i++){
+            for(int j = 0; j <nKolom(m1); j++){
+                if (j<nKolom(m)){
+                    m1[i][j] = m[i][j];
+                } else m1[i][j] = midentitas[i][j-nKolom(m)];
             }
         }
        
-        for(i = 0; i < nBaris(m1); i++)
-        {
-            for(j=0; j < nKolom(m1);j++)
-            {
-                if((j < nKolom(m)))
-                {
-                    m1[i][j] = m[i][j];
-                }
 
-                else 
-                {
-                    m1[i][j] = midentitas[i][j-nKolom(m)];
-    
-                }
-            
+        m1 = Gauss_Jordan.eselonBarisTereduksi(m1);
+
+        m2 = createMatrix(nBaris(m), nKolom(m));
+        for (int i=0; i<nBaris(m1); i++){
+            for (int j=nKolom(m); j<nKolom(m1); j++){
+                m2[i][j-nKolom(m)] = m1[i][j];
             }
         }
-        eselonBarisTereduksi(eselonBaris(m1));
-        //Ini tahap eselon baris tereduksi copas dari yang altha
+        return (m2);
 
-        tulisMatrix(m1);
-        
-        for (i = 0; i < nBaris(m2); i++) {
-            for (j = 0; j < nKolom(m2); j++) 
-            {
-                m2[i][j] = eselonBarisTereduksi(eselonBaris(m1))[i][j + nKolom(m)];
-            }
-          }
-          tulisMatrix(m2);
-
-
-        }
+    }
 }
 
         
