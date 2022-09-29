@@ -31,7 +31,9 @@ public class SPLSolver extends Matrix {
         solution = whatSolution(m);
         switch (solution){
             case 1: 
+                double[] result = splUniqueSol(m);
                 System.out.println("unik");
+                displayUniqueSol(result);
                 break;
             case 2:
                 System.out.println("tak hingga");
@@ -58,6 +60,12 @@ public class SPLSolver extends Matrix {
             }
         }
         return result;
+    }
+
+    public static void displayUniqueSol (double[] result){
+        for (int i =0; i<result.length;i++){
+            System.out.print("X"+(i+1)+" = "+ result[i] +"\n");
+        }
     }
 
     // public static void splInfiniteSol(double[][] m){

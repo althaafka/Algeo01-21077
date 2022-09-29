@@ -38,6 +38,7 @@ public class Bicubic extends Matrix{
             }
         }
         System.out.println(Arrays.toString(F));
+        
 
     }
 }
