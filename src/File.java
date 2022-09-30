@@ -98,5 +98,150 @@ public class File {
         return m;
     }
 
+    public static boolean writeFile(String dir, double[][] m){
+        // Menuliskan hasil operasi matriks ke file.
+        try {
+            FileWriter file = new FileWriter(dir);
+            for (int i=0; i<Matrix.nBaris(m); i++){
+                for(int j=0; i<Matrix.nKolom(m); j++) {
+                    file.write(Double.toString(m[i][j]) +" ");
+                }
+                file.write("\n");
+            }
+            // End Of File
+            file.write("\n");
+            file.close();
+            System.out.println("Matriks telah tersimpan di "+dir);
+            return true;
+        } catch (IOException e){
+            System.out.println("[Error] Gagal menyimpan file.");
+            return false;
+        }
+    }
+
+    public static boolean writeSPLSol (String dir, String[] SPLsolved){
+        // Menuliskan hasil penyelesaian SPL ke file
+        try {
+            FileWriter file = new FileWriter(dir);
+            for (String s : SPLsolved) {
+                file.write(s + "\n");
+            }
+            // End Of File
+            file.write("\n");
+            file.close();
+            System.out.println("Hasil penyelesaian SPL telah tersimpan di "+dir);
+            return true;
+        } catch (IOException e){
+            System.out.println("[Error] Gagal menyimpan file.");
+            return false;
+        }
+    }
+
+    public static boolean writeDeterminan(String dir, double[][] m, double det){
+        // Menuliskan hasil perhitungan determinan matriks ke file
+        try {
+            FileWriter file = new FileWriter(dir);
+            file.write("Hasil determinan matriks \n");
+            for (int i=0; i<Matrix.nBaris(m); i++){
+                for (int j=0; j<Matrix.nKolom(m); j++){
+                    file.write(Double.toString(m[i][j]) + " ");
+                }
+                file.write("\n");
+            }
+            // End Of File
+            file.write("adalah" + Double.toString(det) + "\n");
+            file.close();
+            System.out.println("Hasil determinan telah tersimpan di " + dir);
+            return true;
+        } catch (IOException e){
+            System.out.println("[Error] Gagal menyimpan file.");
+            return false;
+        }
+    }
+
+    public static boolean writeInvers (String dir, double[][] m, double[][] mInverse){
+        // Menuliskan hasil inverse matriks ke file
+        try {
+            FileWriter file = new FileWriter(dir);
+            file.write("Inverse matriks ");
+            for (int i=0; i<Matrix.nBaris(m); i++){
+                for (int j=0; j<Matrix.nKolom(m); j++){
+                    file.write(Double.toString(m[i][j]) + " ");
+                }
+                file.write("\n");
+            }
+            // End Of File
+            file.write("adalah \n");
+            for (int i=0; i<Matrix.nBaris(mInverse); i++){
+                for (int j=0; j<Matrix.nKolom(mInverse); j++){
+                    file.write(Double.toString(mInverse[i][j]) + " ");
+                }
+                file.write("\n");
+            }
+            file.close();
+            System.out.println("Inverse matriks telah tersimpan di " + dir);
+            return true;
+        } catch (IOException e) {
+            System.out.println("[Error] Gagal menyimpan file.");
+            return false;
+        }
+    }
+
+    public static boolean writeFailInverse (String dir, double[][] m){
+        // Jika determinan matriks = 0, maka matriks tidak memiliki invers
+        // Menuliskan pesan error matriks tidak memiliki inverse
+        try {
+            FileWriter file = new FileWriter(dir);
+            file.write("Determinan matriks ");
+            for (int i=0; i<Matrix.nBaris(m); i++){
+                for (int j=0; j<Matrix.nKolom(m); j++){
+                    file.write(Double.toString(m[i][j]) + " ");
+                }
+                file.write("\n");
+            }
+            file.write("adalah 0, sehingga matriks tidak memiliki Inverse \n");
+            file.close();
+            return true;
+        } catch (IOException e){
+            System.out.println("[Error] Gagal menyimpan file.");
+            return false;
+        }
+    }
+
+    public static boolean writeInterpolasi(String dir, double[][] a, double findValOf, double estimateVal){
+        // Menuliskan hasil perhitungan Interpolasi ke file
+        try {
+            FileWriter file = new FileWriter(dir);
+            file.write("Interpolasi menghasilkan persamaan y = ");
+            boolean a0 = true;
+            for (int i = 0; i<Matrix.nBaris(a); i++){
+                if (!(Matrix.isZero(a[i][0]))) {
+                    if (a0){
+                        // a[i] koefisien pertama sehingga tidak perlu diawali +
+                        a0 = false;
+                    } else {
+                        file.write(" + ");
+                    }
+                    file.write(Double.toString(a[i][0]));
+                    if (i != 0){
+                        file.write("x^");
+                        file.write(Integer.toString(i));
+                    }
+                }
+            }
+            // End Penulisan polinom
+            file.write("\n");
+            // Penulisan hasil taksiran
+            file.write("Dengan taksiran fungsi saat x =  " + Double.toString(findValOf) + " adalah " + Double.toString(estimateVal));
+            // End Of File
+            file.write("\n");
+            file.close();
+            System.out.println("Berhasil menyimpan hasil interpolasi di "+ dir);
+            return true;
+        } catch (IOException e){
+            System.out.println("[Error] Gagal menyimpan file.");
+            return false;
+        }
+    }
 }
 
