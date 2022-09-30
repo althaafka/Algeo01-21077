@@ -1,15 +1,16 @@
-import java.util.Scanner;
-
 public class InterpolasiPolinom extends Matrix {
     public static void main(String[] args){
         double[][] mInt, mAug, mRes;
         int n = scan.nextInt();
         mInt = inputInterpolasi(n);
+        tulisMatrix(mInt);
         mAug = InputtoAugmented(mInt);
+        tulisMatrix(mAug);
         mRes = resultPolinom(mAug);
+        tulisMatrix(mRes);
         // Input nilai x untuk estimasi
-        n = scan.nextInt();
-        double result = EstimasiFungsi(mRes, n);
+        double x = scan.nextDouble();
+        double result = EstimasiFungsi(mRes, x);
         System.out.println("Hasil " + result);
     }
     public static double[][] inputInterpolasi(int n){
@@ -49,11 +50,13 @@ public class InterpolasiPolinom extends Matrix {
         return x;
     }
 
-    public static double EstimasiFungsi(double[][] a, int x){
+    public static double EstimasiFungsi(double[][] a, double x){
         double result = 0;
-        for (int i = 0; i < nKolom(a); i++) {
+        for (int i = 0; i < nBaris(a); i++) {
             result += (Math.pow(x, i) * a[i][0]);
+            System.out.println("Mencari estimasi = " + a[i][0] + "*" + Math.pow(x, i));
         }
+        System.out.println("\n");
         return result;
     }
 }

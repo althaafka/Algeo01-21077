@@ -23,4 +23,10 @@ public class SolusiBalikan extends Matrix{
 
         return x;
     }
+    public static double turnToZero(double x){
+        if (isZero(x)){
+            return 0;
+        }
+        return x;
+    }
 }
