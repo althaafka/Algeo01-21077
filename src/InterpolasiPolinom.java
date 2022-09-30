@@ -60,7 +60,7 @@ public class InterpolasiPolinom extends Matrix {
     }
 
     public static void displayFx(double[] mRes){
-        System.out.print("y = ");
+        System.out.print("f(x) = ");
         boolean first = true;
         for(int i=0; i < mRes.length; i++){
             if (!isZero(mRes[i])){
@@ -101,7 +101,7 @@ public class InterpolasiPolinom extends Matrix {
         mAug = InputtoAugmented(mInt);
         mRes = resultPolinom(mAug);
 
-        System.out.print("nilai x yang akan dicari: ");
+        System.out.print("Nilai x yang akan dicari: ");
         double x = scan.nextDouble();
         double result = EstimasiFungsi(mRes, x);
         displayFx(mRes);
@@ -116,7 +116,7 @@ public class InterpolasiPolinom extends Matrix {
         mAug = InputtoAugmented(mInt);
         mRes = resultPolinom(mAug);
         displayFx(mRes);
-        System.out.print("nilai x yang akan dicari: ");
+        System.out.print("Nilai x yang akan dicari: ");
         double x = scan.nextDouble();
         double result = EstimasiFungsi(mRes, x);
         System.out.println("f("+x+") = " + result);

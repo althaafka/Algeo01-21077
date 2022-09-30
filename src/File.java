@@ -217,7 +217,7 @@ public class File {
         // Menuliskan hasil perhitungan Interpolasi ke file
         try {
             FileWriter file = new FileWriter(dir);
-            file.write("Interpolasi menghasilkan persamaan y = ");
+            file.write("Interpolasi menghasilkan persamaan \nf(x) = ");
             boolean a0 = true;
             for (int i = 0; i<Matrix.nBaris(a); i++){
                 if (!(Matrix.isZero(a[i][0]))) {
@@ -237,7 +237,7 @@ public class File {
             // End Penulisan polinom
             file.write("\n");
             // Penulisan hasil taksiran
-            file.write("Dengan taksiran fungsi saat x =  " + Double.toString(findValOf) + " adalah " + Double.toString(estimateVal));
+            file.write("Dengan taksiran f(  " + Double.toString(findValOf) + " ) = " + Double.toString(estimateVal));
             // End Of File
             file.write("\n");
             file.close();
