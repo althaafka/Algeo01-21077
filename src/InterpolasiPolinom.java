@@ -19,7 +19,10 @@ public class InterpolasiPolinom extends Matrix {
     public static double[][] inputInterpolasi(int n){
         double[][] mInput = createMatrix(n, 2);
         for (int i=0; i<nBaris(mInput);i++){
+            System.out.println("Titik "+ (i+1));
             for (int j=0; j<nKolom(mInput); j++){
+                if(j==0) System.out.print("x"+(i+1)+": ");
+                if(j==1) System.out.print("y"+(i+1)+": ");
                 mInput[i][j] = scan.nextDouble();
             }
         }
@@ -50,9 +53,73 @@ public class InterpolasiPolinom extends Matrix {
         double result = 0;
         for (int i = 0; i < a.length; i++) {
             result += (Math.pow(x, i) * a[i]);
-            System.out.println("Mencari estimasi = " + a[i] + "*" + Math.pow(x, i));
+            // System.out.println("Mencari estimasi = " + a[i] + " * " + Math.pow(x, i));
         }
-        System.out.println("\n");
+        System.out.println();
         return result;
+    }
+
+    public static void displayFx(double[] mRes){
+        System.out.print("y = ");
+        boolean first = true;
+        for(int i=0; i < mRes.length; i++){
+            if (!isZero(mRes[i])){
+                if (i==0){
+                    System.out.print(mRes[i]);
+                    first=false;
+                } else{
+                    if(!first) {
+                        System.out.print(" + ");
+                        first = false;
+                    }
+                    System.out.print(mRes[i] + " x^"+ (i) );
+                    first = false;
+                }
+                // if (!first) {
+                //     System.out.print(" + ");
+                // } else if (i==0) {
+                //     System.out.print(mRes[i]);
+                //     first=false;
+                // } else {
+                //     System.out.print(mRes[i] + " x^"+ (i+1) );
+                //     first = false;
+                // }
+            }
+        }
+        System.out.println();
+    }
+    public static void inputInterpolasiFull(){
+        System.out.print("Banyak titik: ");
+        int n = scan.nextInt();
+        while (n<0){
+            System.out.println("Banyak titik harus >0");
+            n = scan.nextInt();
+        }
+        double[][] mInt, mAug;
+        double[] mRes;
+        mInt = inputInterpolasi(n);
+        mAug = InputtoAugmented(mInt);
+        mRes = resultPolinom(mAug);
+
+        System.out.print("nilai x yang akan dicari: ");
+        double x = scan.nextDouble();
+        double result = EstimasiFungsi(mRes, x);
+        displayFx(mRes);
+        System.out.println("f("+x+") = " + result);
+        System.out.println();
+    }
+
+    public static void interpolasiFile(double[][] m){
+        double[][] mInt, mAug;
+        double[] mRes;
+        mInt = m;
+        mAug = InputtoAugmented(mInt);
+        mRes = resultPolinom(mAug);
+        displayFx(mRes);
+        System.out.print("nilai x yang akan dicari: ");
+        double x = scan.nextDouble();
+        double result = EstimasiFungsi(mRes, x);
+        System.out.println("f("+x+") = " + result);
+        System.out.println();
     }
 }

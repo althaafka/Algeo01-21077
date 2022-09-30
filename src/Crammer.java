@@ -1,5 +1,5 @@
 public class Crammer extends Matrix {
-    public static void crammerhasil(double[][] m2,double[][] m1)  {
+    public static double[] crammerhasil(double[][] m2,double[][] m1)  {
         double[][] m3,temp;
         double[][] pembanding;
         Double detUmum, hasil;
@@ -25,6 +25,7 @@ public class Crammer extends Matrix {
         Double[] nilaisebelumnya = new Double[nBaris(m2)];
         //Deklarasi array untuk menyimpan nilai-nilai determinan 
         Double[] nilaidet = new Double[nKolom(m2)+1];
+        double[] output = new double[nKolom(m2)];
         
         detUmum = Determinan.determinan(m2);
         k = 1;
@@ -49,33 +50,35 @@ public class Crammer extends Matrix {
                 k++;
         }
         
-        if(detUmum == 0)
-        {
-            System.out.println("Tidak Memenuhi syarat");
-        }
+        // if(detUmum == 0)
+        // {
+        //     System.out.println("Tidak Memenuhi syarat");
+        // }
 
-        else
-        {
+        // else
+        // {
+            int idxoutput = 0;
             for(i = nBaris(m2); i >= 1;i--)
             {
                 hasil = nilaidet[i]/detUmum;
-                System.out.print(hasil);
-                System.out.print("\n");
+                // System.out.print(hasil);
+                // System.out.print("\n");
+                output[idxoutput]= hasil;
+                idxoutput++;
             }
-        }
-
+        // }
+            return output;
         
     }
 
     public static void main(String[] args) {
-        double[][] m1,m2;
-        System.out.println("Untuk matriks utama");
-        m2 = bacaMatrix();
+        double[][] m1,m2,m3;
 
-        System.out.println("Untuk matriks hasil");
         m1 = bacaMatrix();
+        m2 = AugmentedtoSquare(m1);
+        m3 = augmentedtoKoef(m1);
 
-        crammerhasil(m2,m1);
+        crammerhasil(m2,m3);
         
     }
 }

@@ -1,15 +1,15 @@
 class DeterminanGJ extends Matrix {
     public static void main(String[] args) {
-        double[][] m;
-        m = createMatrix(10, 10);
-        System.out.println(nBaris(m));
-        System.out.println(nKolom(m));
-        m = bacaMatrix();
-        determiananGaussJordan (m);
+        // double[][] m;
+        // m = createMatrix(10, 10);
+        // System.out.println(nBaris(m));
+        // System.out.println(nKolom(m));
+        // m = bacaMatrix();
+        // determiananGaussJordan (m);
 
     }
 
-    public static void determiananGaussJordan (double[][] m)
+    public static double determiananGaussJordan (double[][] m)
     {
         //INI KAMUS
         double det,temp,copyan;
@@ -159,7 +159,8 @@ class DeterminanGJ extends Matrix {
             
         }
        
-        System.out.print(det);
+        // System.out.print(det);
+        return det;
 
         }        
 

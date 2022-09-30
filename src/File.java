@@ -20,7 +20,7 @@ public class File {
         // Mengembalikan path file input yang telah divalidasi
         String fileName;
         String dir = System.getProperty("user.dir");
-        System.out.println(dir.replace('\\', '/'));
+        // System.out.println(dir.replace('\\', '/'));
         FileReader file = null;
 
         System.out.println("Masukkan nama file");
@@ -31,6 +31,7 @@ public class File {
             file = new FileReader(fileName);
         } catch (FileNotFoundException fe) {
         System.out.println("File tidak ditemukan.");
+        System.out.println();
         fileName = inputFileName();
         }
 
@@ -90,8 +91,12 @@ public class File {
 
         for (int i=0; i<row; i++){
             for (int j=0; j<col; j++){
-                double el = scan.nextDouble();
-                m[i][j] = el;
+                try {
+                    double el = scan.nextDouble();
+                    m[i][j] = el;
+                } catch (Exception e){
+                    m[i][j] = 0;
+                }
             }
         }
         scan.close();

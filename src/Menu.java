@@ -35,7 +35,7 @@ public class Menu {
         System.out.println("Sistem Persamaan Liniear");
         System.out.println("1. Eliminasi Gauss");
         System.out.println("2. Eliminasi Gauss-Jordan");
-        System.out.println("3. Matriks Inverse");
+        System.out.println("3. Matriks Invers");
         System.out.println("4. Metode Cramer");
     }
 
@@ -57,5 +57,11 @@ public class Menu {
         System.out.println("Input Data Matrix");
         System.out.println("1. Input Keyboard");
         System.out.println("2. Input File");
+    }
+
+    public static void displayMenuSave(){
+        System.out.println("Ingin menyimpan file?");
+        System.out.println("1. Ya");
+        System.out.println("2. Tidak, kembali ke menu utama");
     }
 }

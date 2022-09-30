@@ -67,6 +67,32 @@ public class Matrix {
         return m;
     }
 
+    public static double[][] bacaMatrixSquare(){
+        int nrow, ncol;
+        double [][] m;
+        System.out.println("Masukkan ukuran matriks");
+        System.out.print("Jumlah baris: ");
+        nrow = scan.nextInt();
+        System.out.print("Jumlah kolom: ");
+        ncol = scan.nextInt();
+        while (nrow<=0 || ncol<=0 || nrow!=ncol){
+            System.out.println("Masukkan invalid. Baris & kolom harus >0 dan Matrix harus persegi");
+            System.out.print("Jumlah baris: ");
+            nrow = scan.nextInt();
+            System.out.print("Jumlah kolom: ");
+            ncol = scan.nextInt();
+        }
+        m = createMatrix(nrow, ncol);
+        System.out.println("Masukan elemen matriks");
+        for (int i=0; i<nrow;i++){
+            for (int j=0; j<ncol; j++){
+                System.out.print("Elemen M["+i+"]["+j+"]: ");
+                m[i][j] = scan.nextDouble();
+            }
+        }
+        return m;
+    }
+
     public static void tulisMatrix(double[][] m){
         // Menampilkan matriks ke layar
         for (int i=0;i<nBaris(m);i++){
@@ -147,6 +173,14 @@ public class Matrix {
         }
         return SquareMat;
     }
+
+    public static double[][] augmentedtoKoef(double[][] m){
+        double[][] output = createMatrix(nBaris(m), 1);
+        for (int i=0; i<nBaris(m); i++ ){
+            output[i][0] = m[i][nKolom(m)-1];
+        }
+        return output;
+    }
     public static double[][] transpose(double[][] m){
         // Transpose Matriks;
         double[][] mTranspose = createMatrix(nKolom(m), nBaris(m));
@@ -180,5 +214,7 @@ public class Matrix {
         }
         return mKali;
     }
+
+    
 }
 

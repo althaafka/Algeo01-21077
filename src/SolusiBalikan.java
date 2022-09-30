@@ -1,12 +1,15 @@
+import java.util.Arrays;
+
 public class SolusiBalikan extends Matrix{
     public static void main(String[] args){
-        double[][] m1, res;
+        double[][] m1;
+        double[] res;
         m1 = bacaMatrix();
         tulisMatrix(m1);
         res = SolusiBalikan.SolveBalikan(m1);
-        tulisMatrix(res);
+        System.out.println(Arrays.toString(res));
     }
-    public static double[][] SolveBalikan(double[][] A){
+    public static double[] SolveBalikan(double[][] A){
         // Prekondisi A selalu augmented
         // x = A^(-1)b
 
@@ -21,7 +24,12 @@ public class SolusiBalikan extends Matrix{
         double[][] Ainverse = Invers.InversCofactor(A);
         double[][] x = kaliMatriks(Ainverse, b);
 
-        return x;
+        double[] output = new double[nBaris(x)];
+        for (int i=0; i<output.length;i++){
+            output[i]=x[i][0];
+        }
+
+        return output;
     }
     public static double turnToZero(double x){
         if (isZero(x)){
