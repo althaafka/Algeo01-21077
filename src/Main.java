@@ -15,7 +15,6 @@ class Main extends Menu{
                         break;
                     case 2: //input file
                         String fileName;
-                        System.out.println("input file belum jadii");
                         fileName = File.inputFileName();
                         m = File.fileMatrix(fileName);
                         break;
