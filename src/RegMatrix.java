@@ -49,6 +49,18 @@ public class RegMatrix extends Matrix {
         }
       
         tulisMatrix(m3);
+
+        m4 = Gauss_Jordan.eselonBarisTereduksi(m3);
+        tulisMatrix(m3);
+        double[] koefreg = new double[nKolom(m) + 1];
+
+        for(i = 0; i <= nKolom(m);i++)
+        {
+            koefreg[i] = m4[i][nKolom(m) + 1];
+            System.out.println(koefreg[i]);
+            System.out.println("\n");
+    
+        }
         
 
     }
