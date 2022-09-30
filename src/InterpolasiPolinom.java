@@ -1,13 +1,16 @@
+import java.util.Arrays;
+
 public class InterpolasiPolinom extends Matrix {
     public static void main(String[] args){
-        double[][] mInt, mAug, mRes;
+        double[][] mInt, mAug;
+        double[] mRes;
         int n = scan.nextInt();
         mInt = inputInterpolasi(n);
         tulisMatrix(mInt);
         mAug = InputtoAugmented(mInt);
         tulisMatrix(mAug);
         mRes = resultPolinom(mAug);
-        tulisMatrix(mRes);
+        System.out.println(Arrays.toString(mRes));
         // Input nilai x untuk estimasi
         double x = scan.nextDouble();
         double result = EstimasiFungsi(mRes, x);
@@ -38,23 +41,16 @@ public class InterpolasiPolinom extends Matrix {
         return mAug;
     }
 
-    public static double[][] resultPolinom(double[][] mInterpolasi){
-        double[][] mResult = Gauss.eselonBaris(mInterpolasi); // Gunakan gauss hasilkan result
-
-        // Dihasilkan matriks hasil x
-        double[][] x = createMatrix(nBaris(mResult), 1);
-        for (int i = 0; i < nBaris(x); i++) {
-            x[i][0] = mResult[i][nKolom(mResult)-1];
-        }
-
-        return x;
+    public static double[] resultPolinom(double[][] mInterpolasi){
+        double[] mResult = SPLSolver.splUniqueSol(Gauss.eselonBaris(mInterpolasi)); // Gunakan gauss hasilkan result
+        return mResult;
     }
 
-    public static double EstimasiFungsi(double[][] a, double x){
+    public static double EstimasiFungsi(double[] a, double x){
         double result = 0;
-        for (int i = 0; i < nBaris(a); i++) {
-            result += (Math.pow(x, i) * a[i][0]);
-            System.out.println("Mencari estimasi = " + a[i][0] + "*" + Math.pow(x, i));
+        for (int i = 0; i < a.length; i++) {
+            result += (Math.pow(x, i) * a[i]);
+            System.out.println("Mencari estimasi = " + a[i] + "*" + Math.pow(x, i));
         }
         System.out.println("\n");
         return result;
