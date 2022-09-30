@@ -77,6 +77,35 @@ public class Matrix {
         }
     }
 
+    // public static double tulisMatrixB(double[][] b){
+    //     int nrow, ncol;
+    //     double [][] m;
+    //     System.out.println("Masukkan ukuran matriks");
+    //     System.out.print("Jumlah baris: ");
+    //     nrow = scan.nextInt();
+    //     System.out.print("Jumlah kolom: ");
+    //     ncol = scan.nextInt();
+    //     while (nrow<=0 || ncol<=0){
+    //         System.out.println("Masukkan invalid. Ukuran baris dan kolom harus >0");
+    //         System.out.print("Jumlah baris: ");
+    //         nrow = scan.nextInt();
+    //         System.out.print("Jumlah kolom: ");
+    //         ncol = scan.nextInt();
+    //     }
+    //     m = createMatrix(nrow, ncol);
+    //     System.out.println("Masukan elemen matriks");
+    //     for (int i=0; i<nrow;i++){
+    //         for (int j=0; j<ncol; j++){
+    //             System.out.print("Elemen M["+i+"]["+j+"]: ");
+    //             m[i][j] = scan.nextDouble();
+
+    //         }
+    //     }
+    //     return m;
+            
+    //     }
+    // }
+
     // OPERASI OBE
     public static double[][] swapBaris(double[][] m, int idxRow1, int idxRow2){
         double [] rowTemp = m[idxRow1];
