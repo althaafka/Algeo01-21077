@@ -5,15 +5,17 @@ public class File {
 
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args){
+                // int x = fileRow("D:/altha/Kuliah/Semester III/TubesAlgeo/Tubes-Algeo/test/text.txt");
         String fileName;
-        // int x = fileRow("D:/altha/Kuliah/Semester III/TubesAlgeo/Tubes-Algeo/test/text.txt");
         fileName= inputFileName();
-        int x = fileRow(fileName);
-        int y = fileCol(fileName);
-        System.out.println(y);
+        // int x = fileRow(fileName);
+        // int y = fileCol(fileName);
+        // System.out.println(y);
         double[][] m;
         m = fileMatrix(fileName);
         Matrix.tulisMatrix(m);
+        String path = scan.next();
+        writeFileMatrix(path, m);
     }
     
     public static String inputFileName(){
@@ -96,6 +98,33 @@ public class File {
         }
         scan.close();
         return m;
+    }
+
+    public static void writeFileMatrix (String path, double[][] m){
+        try {
+            FileWriter writer = new FileWriter(path);
+            for(int i=0; i<Matrix.nBaris(m); i++){
+                for (int j=0; j<Matrix.nKolom(m); j++){
+                    writer.write(Double.toString(m[i][j]) + " ");
+                }
+                writer.write("\n");
+            }
+            writer.close();
+        } catch (IOException e){
+            System.out.println("Penulisan file gagal");
+        }
+    }
+
+    public static void writeFileSPL(String path, String[] result){
+        try {
+            FileWriter writer = new FileWriter(path);
+            for (int i=0; i<result.length; i++){
+                writer.write(result[i] + "\n");
+            }
+            writer.close();
+        } catch (IOException e){
+            System.out.println("Penulisan file gagal");
+        }
     }
 
 }

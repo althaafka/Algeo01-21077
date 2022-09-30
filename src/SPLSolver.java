@@ -3,16 +3,20 @@ import java.util.Arrays;
 public class SPLSolver extends Matrix {
 
     public static void main (String args[]){
-        double[] a = new double[] {1,0,0};
-        double[] b = new double[] {3,2,0};
-        double[] c = new double[] {0,0,0};
-        double x = -2;
-        // c = addArr(a, b);
-        for (int i = 0; i<c.length; i++){
-            c[i] = a[i]+b[i];
-        }
-        System.out.println(Arrays.toString(a));
-        System.out.println(Arrays.toString(c));
+        // double[] a = new double[] {1,0,0};
+        // double[] b = new double[] {3,2,0};
+        // double[] c = new double[] {0,0,0};
+        // double x = -2;
+        // // c = addArr(a, b);
+        // for (int i = 0; i<c.length; i++){
+        //     c[i] = a[i]+b[i];
+        // }
+        // System.out.println(Arrays.toString(a));
+        // System.out.println(Arrays.toString(c));
+        
+
+
+
     }
     public static int whatSolution(double[][] m){
         // Jika jumlah persamaan lebih sedikit dari jumlah variabel
@@ -38,7 +42,8 @@ public class SPLSolver extends Matrix {
             case 2:
                 System.out.println("SPL Memiliki Solusi Tak Hingga");
                 double[][] infresult =  splInfiniteSol(m);
-                displayInfiniteSol(infresult);
+                String[] strRes = infiniteSol2Arr(infresult);
+                displayInfiniteSol(strRes);
                 break;
             case 3:
                 System.out.println("SPL Tidak Memiliki Solusi");
@@ -67,6 +72,14 @@ public class SPLSolver extends Matrix {
         for (int i =0; i<result.length;i++){
             System.out.print("X"+(i+1)+" = "+ result[i] +"\n");
         }
+    }
+
+    public static String[] uniqueSol2Arr (double[] arr){
+        String[] output = new String[arr.length] ;
+        for (int i =0; i<arr.length; i++){
+            output[i] = Double.toString(arr[i]);
+        }
+        return output;
     }
 
     public static double[][] splInfiniteSol(double[][] m){
@@ -140,30 +153,58 @@ public class SPLSolver extends Matrix {
         return result;
         }
         
-        public static void displayInfiniteSol(double[][] result){
+        public static void displayInfiniteSol(String[] result){
+            for (int i = 0; i<result.length;i++){
+                System.out.println(result[i]);
+            }
+            // char var = 's';
+            // boolean first;
+            // for (int i=0; i<nBaris(result); i++){
+            //     System.out.print("X"+(i+1)+ " = ");
+            //     first = true;
+            //     for (int j=0; j<nKolom(result); j++){
+            //         if (!isZero(result[i][j])){
+            //             if (j==0){
+            //                 System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
+            //                 first = false;
+            //             } else if (j==nKolom(result)-1){
+            //                 if (!first) System.out.print(" + ");
+            //                 System.out.print(result[i][j]);
+            //                 first = false;
+            //             } else{
+            //                 if (!first) System.out.print(" + ");
+            //                 System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
+            //                 first = false;
+            //             }
+            //         }
+            //     }
+            //     System.out.println();
+            // }
+        }
+
+        public static String[] infiniteSol2Arr(double[][] result){
+            String[] output = new String [nBaris(result)];
+            String str = "";
             char var = 's';
             boolean first;
             for (int i=0; i<nBaris(result); i++){
-                System.out.print("X"+(i+1)+ " = ");
+                str = "X"+ Integer.toString(i+1)+ " = ";
                 first = true;
                 for (int j=0; j<nKolom(result); j++){
                     if (!isZero(result[i][j])){
-                        if (j==0){
-                            System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
-                            first = false;
-                        } else if (j==nKolom(result)-1){
-                            if (!first) System.out.print(" + ");
-                            System.out.print(result[i][j]);
-                            first = false;
+                        if(j==nKolom(result)-1){
+                            if (!first) str+=" + ";
+                            str += Double.toString(result[i][j]);
                         } else{
-                            if (!first) System.out.print(" + ");
-                            System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
+                            if (!first) str+=" + ";
+                            str += "("+ Double.toString(result[i][j]) +")"+Character.toString((char)((int)(var+j)));
                             first = false;
                         }
                     }
                 }
-                System.out.println();
+                output[i] = str;
             }
+            return output;
         }
         
     }
