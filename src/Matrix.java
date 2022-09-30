@@ -108,5 +108,48 @@ public class Matrix {
         }
         return true;
     }
+    public static double[][] AugmentedtoSquare(double[][] m){
+        // Mengubah matriks augmented menjadi matriks persegi
+        double[][] SquareMat = createMatrix(nBaris(m), nKolom(m)-1);
+        for (int i = 0; i < nBaris(SquareMat); i++) {
+            for (int j = 0; j < nKolom(SquareMat); j++) {
+                SquareMat[i][j] = m[i][j];
+            }
+        }
+        return SquareMat;
+    }
+    public static double[][] transpose(double[][] m){
+        // Transpose Matriks;
+        double[][] mTranspose = createMatrix(nKolom(m), nBaris(m));
+        for (int i=0; i<nBaris(mTranspose); i++){
+            for (int j=0; j<nKolom(mTranspose); j++){
+                mTranspose[i][j] = m[j][i];
+            }
+        }
+        return mTranspose;
+    }
+
+    public static double[][] kaliKonstanta(double[][] m, double x){
+        for (int i=0; i<nBaris(m); i++){
+            for (int j=0; j<nKolom(m); j++){
+                m[i][j] = m[i][j]*x;
+            }
+        }
+        return m;
+    }
+    public static double[][] kaliMatriks (double[][] m1, double[][] m2){
+        // Prekondisi nKolom(m1) = nBaris(mat2)
+        double[][] mKali = createMatrix(nBaris(m1), nKolom(m2));
+
+        for (int i = 0; i < nBaris(mKali); i++) {
+            for (int j = 0; j < nKolom(mKali); j++) {
+                mKali[i][j] = 0;
+                for (int k = 0; k < nKolom(m1); k++) {
+                    mKali[i][j] += m1[i][k] * m2[k][j];
+                }
+            }
+        }
+        return mKali;
+    }
 }
 
