@@ -67,46 +67,11 @@ public class Matrix {
         return m;
     }
 
-    public static double[][] bacaMatrixSquare(){
-        int nrow, ncol;
-        double [][] m;
-        System.out.println("Masukkan ukuran matriks");
-        System.out.print("Jumlah baris: ");
-        nrow = scan.nextInt();
-        System.out.print("Jumlah kolom: ");
-        ncol = scan.nextInt();
-        while (nrow!=ncol || nrow<=0 || ncol<=0){
-            if (nrow<=0 || ncol<=0){
-                System.out.println("Masukkan invalid. Ukuran baris dan kolom harus >0");
-                System.out.print("Jumlah baris: ");
-                nrow = scan.nextInt();
-                System.out.print("Jumlah kolom: ");
-                ncol = scan.nextInt();
-            } else {
-                System.out.println("Masukkan invalid. Matrix harus matrix persegi");
-                System.out.print("Jumlah baris: ");
-                nrow = scan.nextInt();
-                System.out.print("Jumlah kolom: ");
-                ncol = scan.nextInt();
-            }
-        }
-        m = createMatrix(nrow, ncol);
-        System.out.println("Masukan elemen matriks");
-        for (int i=0; i<nrow;i++){
-            for (int j=0; j<ncol; j++){
-                System.out.print("Elemen M["+i+"]["+j+"]: ");
-                m[i][j] = scan.nextDouble();
-            }
-        }
-        return m;
-    }
-
     public static void tulisMatrix(double[][] m){
         // Menampilkan matriks ke layar
         for (int i=0;i<nBaris(m);i++){
             for (int j=0;j<nKolom(m);j++){
-                System.out.printf("%02f",m[i][j]);
-                System.out.print(" ");
+                System.out.print(m[i][j]+ " ");
             }
             System.out.println();
         }
@@ -143,6 +108,35 @@ public class Matrix {
         }
         return true;
     }
+    public static double[][] AugmentedtoSquare(double[][] m){
+        // Mengubah matriks augmented menjadi matriks persegi
+        double[][] SquareMat = createMatrix(nBaris(m), nKolom(m)-1);
+        for (int i = 0; i < nBaris(SquareMat); i++) {
+            for (int j = 0; j < nKolom(SquareMat); j++) {
+                SquareMat[i][j] = m[i][j];
+            }
+        }
+        return SquareMat;
+    }
+    public static double[][] transpose(double[][] m){
+        // Transpose Matriks;
+        double[][] mTranspose = createMatrix(nKolom(m), nBaris(m));
+        for (int i=0; i<nBaris(mTranspose); i++){
+            for (int j=0; j<nKolom(mTranspose); j++){
+                mTranspose[i][j] = m[j][i];
+            }
+        }
+        return mTranspose;
+    }
+
+    public static double[][] kaliKonstanta(double[][] m, double x){
+        for (int i=0; i<nBaris(m); i++){
+            for (int j=0; j<nKolom(m); j++){
+                m[i][j] = m[i][j]*x;
+            }
+        }
+        return m;
+    }
     public static double[][] kaliMatriks (double[][] m1, double[][] m2){
         // Prekondisi nKolom(m1) = nBaris(mat2)
         double[][] mKali = createMatrix(nBaris(m1), nKolom(m2));
@@ -156,13 +150,6 @@ public class Matrix {
             }
         }
         return mKali;
-    }
-
-    public static double turnToZero(double x){
-        if (isZero(x)){
-            return 0;
-        }
-        return x;
     }
 }
 
