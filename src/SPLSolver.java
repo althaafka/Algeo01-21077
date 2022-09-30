@@ -3,16 +3,20 @@ import java.util.Arrays;
 public class SPLSolver extends Matrix {
 
     public static void main (String args[]){
-        double[] a = new double[] {1,0,0};
-        double[] b = new double[] {3,2,0};
-        double[] c = new double[] {0,0,0};
-        double x = -2;
-        // c = addArr(a, b);
-        for (int i = 0; i<c.length; i++){
-            c[i] = a[i]+b[i];
-        }
-        System.out.println(Arrays.toString(a));
-        System.out.println(Arrays.toString(c));
+        // double[] a = new double[] {1,0,0};
+        // double[] b = new double[] {3,2,0};
+        // double[] c = new double[] {0,0,0};
+        // double x = -2;
+        // // c = addArr(a, b);
+        // for (int i = 0; i<c.length; i++){
+        //     c[i] = a[i]+b[i];
+        // }
+        // System.out.println(Arrays.toString(a));
+        // System.out.println(Arrays.toString(c));
+        
+
+
+
     }
     public static int whatSolution(double[][] m){
         // Jika jumlah persamaan lebih sedikit dari jumlah variabel
@@ -31,14 +35,18 @@ public class SPLSolver extends Matrix {
         solution = whatSolution(m);
         switch (solution){
             case 1: 
-                System.out.println("unik");
+                double[] result = splUniqueSol(m);
+                System.out.println("SPL Memiliki Solusi Unik");
+                displayUniqueSol(result);
                 break;
             case 2:
-                System.out.println("tak hingga");
-                splInfiniteSol(m);
+                System.out.println("SPL Memiliki Solusi Tak Hingga");
+                double[][] infresult =  splInfiniteSol(m);
+                String[] strRes = infiniteSol2Arr(infresult);
+                displayInfiniteSol(strRes);
                 break;
             case 3:
-                System.out.println("no solution");
+                System.out.println("SPL Tidak Memiliki Solusi");
                 break;
 
         }
@@ -60,33 +68,21 @@ public class SPLSolver extends Matrix {
         return result;
     }
 
-    // public static void splInfiniteSol(double[][] m){
-    //     String[] result = new String [nKolom(m)-1];
-    //     char[] var = new char [nKolom(m)-1];
-    //     int[] idxLeading1 = new int[] {-1,-1};
-    //     char firstVar = 's';
-    //     for (int j=0;j<nKolom(m)-1;j++){
-    //         result[j]="";
-    //     }
-    //     m = Gauss_Jordan.eselonBarisTereduksi(m);
-    //     for (int j=0; j<nKolom(m)-1;j++){
-    //         idxLeading1 = Gauss.idxLeadingOne(m, idxLeading1);
-    //         if (idxLeading1[1]!=j){
-    //             var[j]= (char)((int)firstVar+j);
-    //             result[j] = Character.toString(var[j]);
-    //         }
-    //     }
-    //     idxLeading1 = new int[] {-1,-1};
-    //     for (int i=nBaris(m)-1; i<=0; i++){
-    //         idxLeading1 = Gauss.idxLeadingOne(m,idxLeading1);
-    //         result[0]= Double.toString(m[i][nKolom(m)-1]);
-    //         for(int j=0; i<nKolom(m)-1; j++){
-    //             if(!isZero(m[i][j]) && result[j]!=""){
-    //                 result[j]+= result
-    //             }
-    //         }
-    //     }
-    public static void splInfiniteSol(double[][] m){
+    public static void displayUniqueSol (double[] result){
+        for (int i =0; i<result.length;i++){
+            System.out.print("X"+(i+1)+" = "+ result[i] +"\n");
+        }
+    }
+
+    public static String[] uniqueSol2Arr (double[] arr){
+        String[] output = new String[arr.length] ;
+        for (int i =0; i<arr.length; i++){
+            output[i] = Double.toString(arr[i]);
+        }
+        return output;
+    }
+
+    public static double[][] splInfiniteSol(double[][] m){
         m = Gauss_Jordan.eselonBarisTereduksi(m);
         double[][] result;
         int[] idxLeading1 = new int[] {-1,-1};
@@ -129,11 +125,8 @@ public class SPLSolver extends Matrix {
                 idxLeading1 = idxLeading1Temp;
             }
         }
-        tulisMatrix(result);
+
         // Mengisi matrix result
-
-
-
         int idxVar = 0;
         double[] arrTemp = new double[result[0].length];
         idxLeading1 = new int[] {-1,-1};
@@ -150,46 +143,73 @@ public class SPLSolver extends Matrix {
                         for (int l = 0; l <result[j].length; l++){
                             result[idxVar][l]+= arrTemp[l];
                         }
-
-                        // result[idxVar] = addArr(result[idxVar],multiplyArr(result[j],m[i][j]));
-                        tulisMatrix(result);
-                        System.out.println();
                     } else if (j==nKolom(m)-1){
                         result[idxVar][nKolom(result)-1] = m[i][j];
                     }
 
                     }
-
-                        // if (j==nKolom(m)-1) {
-                        //     result[idxVar][nKolom(result)-1] = m[i][j];
-                        // }
                 }
             }
+        return result;
+        }
         
-
-        tulisMatrix(result);
-            // int idxVar=0;
-            // idxPar=0;
-            // idxLeading1 = new int[] {-1,-1};
-            // for (int i=nBaris(m)-1;i>=0;i--){
-            //     if (!isRowZero(m,i)){
-            //         idxLeading1[0]=i;
-            //         idxLeading1 = Gauss.idxLeadingOne(m,idxLeading1);
-            //         idxVar = idxLeading1[1];
-            //         for (int j = idxLeading1[1]+1; j<nKolom(m);j++){
-            //             result[idxVar][idxPar]
+        public static void displayInfiniteSol(String[] result){
+            for (int i = 0; i<result.length;i++){
+                System.out.println(result[i]);
+            }
+            // char var = 's';
+            // boolean first;
+            // for (int i=0; i<nBaris(result); i++){
+            //     System.out.print("X"+(i+1)+ " = ");
+            //     first = true;
+            //     for (int j=0; j<nKolom(result); j++){
+            //         if (!isZero(result[i][j])){
+            //             if (j==0){
+            //                 System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
+            //                 first = false;
+            //             } else if (j==nKolom(result)-1){
+            //                 if (!first) System.out.print(" + ");
+            //                 System.out.print(result[i][j]);
+            //                 first = false;
+            //             } else{
+            //                 if (!first) System.out.print(" + ");
+            //                 System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
+            //                 first = false;
+            //             }
             //         }
             //     }
-            //     idxLeading1 = Gauss.idxLeadingOne(m,idxLeading1);
-            //     if (idxLeading1[0]== -1 && idxLeading1[1]==-1){
-            //     }
+            //     System.out.println();
             // }
         }
 
+        public static String[] infiniteSol2Arr(double[][] result){
+            String[] output = new String [nBaris(result)];
+            String str = "";
+            char var = 's';
+            boolean first;
+            for (int i=0; i<nBaris(result); i++){
+                str = "X"+ Integer.toString(i+1)+ " = ";
+                first = true;
+                for (int j=0; j<nKolom(result); j++){
+                    if (!isZero(result[i][j])){
+                        if(j==nKolom(result)-1){
+                            if (!first) str+=" + ";
+                            str += Double.toString(result[i][j]);
+                        } else{
+                            if (!first) str+=" + ";
+                            str += "("+ Double.toString(result[i][j]) +")"+Character.toString((char)((int)(var+j)));
+                            first = false;
+                        }
+                    }
+                }
+                output[i] = str;
+            }
+            return output;
+        }
+        
     }
 
 
     
-
 
 

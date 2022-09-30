@@ -5,27 +5,22 @@ public class Matrix {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args){
-        double[][] m1,m2;
-
-        //m = createMatrix(3, 7);
-        //System.out.println(nBaris(m));
-        //System.out.println(nKolom(m));
-
+        double[][] m,m2;
+        // m = createMatrix(3, 7);
+        // System.out.println(nBaris(m));
+        // System.out.println(nKolom(m));
+        m2 = bacaMatrix();
+        tulisMatrix(m2);
+        System.out.println();
         // m2 = swapBaris(m2, 1, 0);
         // System.out.println();
         // tulisMatrix(m2);
         // m2 = kaliBaris(m2, 2, 10);
         // System.out.println();
         // tulisMatrix(m2);
-        // m2 = barisKurangNBaris(m2, 1, 0, 5);
-        // System.out.println();
-        // tulisMatrix(m2);
-
-        m1 = bacaMatrix();
-        
-    
-       
-
+        m2 = barisKurangNBaris(m2, 1, 0, 5);
+        System.out.println();
+        tulisMatrix(m2);
 
     }
 
@@ -72,7 +67,7 @@ public class Matrix {
         return m;
     }
 
-    public static void tulisMatrix(double [][] m){
+    public static void tulisMatrix(double[][] m){
         // Menampilkan matriks ke layar
         for (int i=0;i<nBaris(m);i++){
             for (int j=0;j<nKolom(m);j++){
@@ -157,3 +152,4 @@ public class Matrix {
         return mKali;
     }
 }
+

@@ -3,25 +3,38 @@ import java.util.Arrays;
 public class Gauss extends Matrix{
 
     public static void main(String[] args){
-        double[][] m;
-        double[] spl;
-        int[] a = new int[]{0,-1};
-        int[] b;
-        m = bacaMatrix();
-        // m = eselonBaris(m);
-        System.out.println();
-        tulisMatrix(m);
-        // m = eselonBaris(m);
+        // double[][] m;
+        // double[] spl;
+        // int[] a = new int[]{0,-1};
+        // int[] b;
+        // m = bacaMatrix();
+        // // m = eselonBaris(m);
+        // System.out.println();
         // tulisMatrix(m);
-        // spl = SPLSolver.splUniqueSol(m);
-        // System.out.println(Arrays.toString(spl));
-        m = Gauss_Jordan.eselonBarisTereduksi(eselonBaris(m));
-        System.out.println();
-        tulisMatrix(m);
-        System.out.println();
-        // b = idxLeadingOne(m, a);
-        // System.out.println(Arrays.toString(b));
-        // if (isRowZero(m,2)) System.out.println("zero");
+        // // m = eselonBaris(m);
+        // // tulisMatrix(m);
+        // // spl = SPLSolver.splUniqueSol(m);
+        // // System.out.println(Arrays.toString(spl));
+        // // m = Gauss_Jordan.eselonBarisTereduksi(eselonBaris(m));
+        // // System.out.println();
+        // m = eselonBaris(m);
+        // System.out.println();
+        // tulisMatrix(m);
+        // System.out.println();
+        // // b = idxLeadingOne(m, a);
+        // // System.out.println(Arrays.toString(b));
+        // // if (isRowZero(m,2)) System.out.println("zero");
+        // SPLSolver.splSolution(m);
+
+        String fileName;
+        fileName= File.inputFileName();
+        // int x = fileRow(fileName);
+        // int y = fileCol(fileName);
+        // System.out.println(y);
+        double[][] m;
+        m = File.fileMatrix(fileName);
+        Matrix.tulisMatrix(m);
+        m = eselonBaris(m);
         SPLSolver.splSolution(m);
     }
     public static double[][] eselonBaris(double[][] m){
@@ -69,27 +82,6 @@ public class Gauss extends Matrix{
         return idx;
     }
 
-    // public static void splSolution (double[][]m){
-    //     double [] spl = new double[nKolom(m)-1];
-    //     if (nKolom(m)-1 == nBaris(m)){
-    //         spl = splUniqueSol(m);
-    //         for (int i=0; i<nKolom(m)-1;i++){
-    //             System.out.println("X"+i+": "+spl[i]);
-    //         }
-    //     } 
 
-
-    // }
-    
-
-    // public static int whatSolution (double[][] m){
-    //     // Jika jumlah persamaan lebih sedikit dari jumlah variabel
-    //     if ((nBaris(m) < nKolom(m)-1) || isRowZero(m, nBaris(m)-1)) return 2;
-        
-
-    //             }
-    //         }
-    //     }
-    // }
 
 }
