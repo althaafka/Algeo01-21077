@@ -52,5 +52,12 @@ public class Menu {
         System.out.println("1. Eliminasi Gauss-Jordan" );
         System.out.println("2. Metode Kofaktor");
     }
+
+    public static void displayMenuInput(){
+        System.out.println("Input Data Matrix");
+        System.out.println("1. Input Keyboard");
+        System.out.println("2. Input File");
+    }
+
 }
 
