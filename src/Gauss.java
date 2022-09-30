@@ -69,6 +69,27 @@ public class Gauss extends Matrix{
         return idx;
     }
 
+    // public static void splSolution (double[][]m){
+    //     double [] spl = new double[nKolom(m)-1];
+    //     if (nKolom(m)-1 == nBaris(m)){
+    //         spl = splUniqueSol(m);
+    //         for (int i=0; i<nKolom(m)-1;i++){
+    //             System.out.println("X"+i+": "+spl[i]);
+    //         }
+    //     } 
 
+
+    // }
+    
+
+    // public static int whatSolution (double[][] m){
+    //     // Jika jumlah persamaan lebih sedikit dari jumlah variabel
+    //     if ((nBaris(m) < nKolom(m)-1) || isRowZero(m, nBaris(m)-1)) return 2;
+        
+
+    //             }
+    //         }
+    //     }
+    // }
 
 }

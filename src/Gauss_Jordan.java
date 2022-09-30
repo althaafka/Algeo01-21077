@@ -6,22 +6,7 @@ public class Gauss_Jordan extends Matrix{
         double[][] m;
         int[] a = new int[]{-1,-1};
         int[] b;
-        m = bacaMatrix();
-        // m = eselonBaris(m);
-        System.out.println();
-        tulisMatrix(m);
-        // b = nextPivot(m, a);
-        // System.out.println(Arrays.toString(b));
-        System.out.println();
-        m = eselonBaris(m);
-        tulisMatrix(m);
-        System.out.println();
-        m = eselonBarisTereduksi(m);
-        tulisMatrix(m);
-        // SPLSolver.splSolution(m);
-    //     if (isZero(0.5)) System.out.println("yess");
-    // //     m = barisKurangNBaris(m,1,2,0.5);
-    // //     tulisMatrix(m);
+        
     }
     public static int[] nextPivot (double[][] m, int[] pivot){
         int [] idx = new int[] {-1,-1};
@@ -56,6 +41,7 @@ public class Gauss_Jordan extends Matrix{
             for (int k = pivot[0]+1; k<nBaris(m);k++){
                 if (!isZero(m[k][pivot[1]])){
                     m = barisKurangNBaris(m, k, pivot[0], m[k][pivot[1]]);
+                    
                 }
             }
         }
