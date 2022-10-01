@@ -15,6 +15,7 @@ public class File {
         double[][] m;
         m = fileMatrix(fileName);
         Matrix.tulisMatrix(m);
+        m = Gauss.eselonBaris(m);
         double[] spl = SPLSolver.splUniqueSol(m);
         System.out.println(Arrays.toString(spl));
         String[] splstr = SPLSolver.uniqueSol2Arr(spl);
@@ -140,10 +141,10 @@ public class File {
             // End Of File
             file.write("\n");
             file.close();
-            System.out.println("Hasil penyelesaian SPL telah tersimpan di "+dir);
+            System.out.println("Hasil penyelesaian SPL telah tersimpan di "+dir+"\n");
             return true;
         } catch (IOException e){
-            System.out.println("[Error] Gagal menyimpan file.");
+            System.out.println("[Error] Gagal menyimpan file.\n");
             return false;
         }
     }
@@ -151,7 +152,6 @@ public class File {
     public static boolean writeDeterminan(String dir, double[][] m, double det){
         // Menuliskan hasil perhitungan determinan matriks ke file
         try {
-            S
             FileWriter file = new FileWriter(dir);
             file.write("Hasil determinan matriks \n");
             for (int i=0; i<Matrix.nBaris(m); i++){
@@ -163,10 +163,10 @@ public class File {
             // End Of File
             file.write("adalah" + Double.toString(det) + "\n");
             file.close();
-            System.out.println("Hasil determinan telah tersimpan di " + dir);
+            System.out.println("Hasil determinan telah tersimpan di " + dir + "\n");
             return true;
         } catch (IOException e){
-            System.out.println("[Error] Gagal menyimpan file.");
+            System.out.println("[Error] Gagal menyimpan file.\n");
             return false;
         }
     }
@@ -248,10 +248,10 @@ public class File {
             // End Of File
             file.write("\n");
             file.close();
-            System.out.println("Berhasil menyimpan hasil interpolasi di "+ dir);
+            System.out.println("Berhasil menyimpan hasil interpolasi di "+ dir+"\n");
             return true;
         } catch (IOException e){
-            System.out.println("[Error] Gagal menyimpan file.");
+            System.out.println("[Error] Gagal menyimpan file.\n");
             return false;
         }
     }

@@ -30,26 +30,28 @@ public class SPLSolver extends Matrix {
         }
         return 3;
     }
-    public static void splSolution(double[][] m){
+    public static String[] splSolution(double[][] m){
         int solution;
         solution = whatSolution(m);
+        String[] output = new String[] {"SPL tidak memiliki solusi"};
         switch (solution){
             case 1: 
                 double[] result = splUniqueSol(m);
                 System.out.println("SPL Memiliki Solusi Unik");
                 displayUniqueSol(result);
+                output = uniqueSol2Arr(result);
                 break;
             case 2:
                 System.out.println("SPL Memiliki Solusi Tak Hingga");
                 double[][] infresult =  splInfiniteSol(m);
-                String[] strRes = infiniteSol2Arr(infresult);
-                displayInfiniteSol(strRes);
+                output = infiniteSol2Arr(infresult);
+                displayInfiniteSol(output);
                 break;
             case 3:
                 System.out.println("SPL Tidak Memiliki Solusi");
                 break;
-
         }
+        return output;
     }
 
     public static double[] splUniqueSol (double[][] m){
@@ -77,7 +79,7 @@ public class SPLSolver extends Matrix {
     public static String[] uniqueSol2Arr (double[] arr){
         String[] output = new String[arr.length] ;
         for (int i =0; i<arr.length; i++){
-            output[i] = Double.toString(arr[i]);
+            output[i] = "X"+(i+1)+" = "+ Double.toString(arr[i]);
         }
         return output;
     }
