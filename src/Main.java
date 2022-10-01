@@ -76,7 +76,7 @@ class Main extends Menu{
                 switch(opt){
                     case 1:
                         System.out.println("Simpan Hasil");
-                        System.out.println("Masukkan nama file output\n>>> ");
+                        System.out.print("Masukkan nama file output\n>>> ");
                         String dir = scan.next();
                         System.out.println();
                         File.writeSPLSol(dir, output);
@@ -262,19 +262,35 @@ class Main extends Menu{
                 System.out.println("Regresi Liniear");
                 displayMenuInput();
                 opt = optionInput(1,2);
+                output =new String[]{};
                 switch(opt){
                     case 1: //input keyboard
-                        InterpolasiPolinom.inputInterpolasiFull();
+                        System.out.println("Regresi Liniear");
+                        m = Matrix.bacaMatrix();
+                        output = RegMatrix.HasilRegresi(m);
                         break;
                     case 2: //input file
-                        // String fileName;
-                        // fileName = File.inputFileName();
-                        // System.out.println();
-                        // m = File.fileMatrix(fileName);
-                        // InterpolasiPolinom.interpolasiFile(m);
-                        // break;
+                        String fileName;
+                        fileName = File.inputFileName();
+                        System.out.println();
+                        m = File.fileMatrix(fileName);
+                        output = RegMatrix.HasilRegresi(m);
+                        break;
                     default: m = Matrix.bacaMatrixSquare();
                 }
+                displayMenuSave();
+                opt = optionInput(1, 2);
+                switch(opt){
+                    case 1:
+                        System.out.println("Simpan Hasil");
+                        System.out.println("Masukkan nama file output>> ");
+                        String dir = scan.next();
+                        File.writeSPLSol(dir, output);
+                        break;
+                    case 2:
+                        break;
+                }
+                break;
             case 7:
                 run = false;
                 System.out.println("Terima kasih");

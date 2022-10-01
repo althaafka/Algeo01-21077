@@ -33,6 +33,7 @@ public class File {
         System.out.println("Masukkan nama file");
         System.out.print(">>> ");
         fileName = scan.next();
+        // String dir = System.getProperty("user.dir");
         // fileName = dir.replace('\\', '/') + "/test/"+ fileName;
         fileName = "../test/" +fileName;
         try {
@@ -133,6 +134,7 @@ public class File {
 
     public static boolean writeSPLSol (String dir, String[] SPLsolved){
         // Menuliskan hasil penyelesaian SPL ke file
+        dir = "../test/" + dir;
         try {
             FileWriter file = new FileWriter(dir);
             for (String s : SPLsolved) {
