@@ -2,9 +2,10 @@ class Main extends Menu{
     public static void main(String[] args){
 
         int opt;
-        double[][] m;
-        double det;
+        double[][] m, mInv;
+        double det = 0;
         boolean run=true;
+        boolean writeFile = false;
         while (run){
         displayMenu();
         opt = optionInput(1, 7);
@@ -36,7 +37,7 @@ class Main extends Menu{
                         System.out.println();
                         break;
                     case 2: //gauss-jordan
-                        System.out.println("SPL Metode Gaus Jordan");
+                        System.out.println("SPL Metode Gauss Jordan");
                         m = Gauss_Jordan.eselonBarisTereduksi(m);
                         Matrix.tulisMatrix(m);
                         SPLSolver.splSolution(m);
@@ -71,7 +72,10 @@ class Main extends Menu{
                 opt = optionInput(1, 2);
                 switch(opt){
                     case 1:
-                        System.out.println("Simpan Hasil");
+                        System.out.println("Simpan Hasil\n");
+                        System.out.println("Masukkan nama file output\n>> ");
+                        String dir = scan.next();
+                        // writeFile = File.writeSPLSol("../test/" + dir, ?? );
                         break;
                     case 2:
                         break;
@@ -121,7 +125,10 @@ class Main extends Menu{
                 opt = optionInput(1, 2);
                 switch(opt){
                     case 1:
-                        System.out.println("Simpan Hasil");
+                        System.out.println("det "+ det +"\n");
+                        System.out.println("Masukkan nama file output\n>> ");
+                        String dir = scan.next();
+                        writeFile = File.writeDeterminan("../test/" + dir, m, det );
                         break;
                     case 2:
                         break;
@@ -153,25 +160,30 @@ class Main extends Menu{
                 }
                 displayMenuInverse();
                 opt = optionInput(1, 2);
+                mInv = Matrix.createMatrix(Matrix.nBaris(m), Matrix.nKolom(m));
                 switch(opt){
                     case 1: //el gaus jordan
                         System.out.println("Matrix Invers Metode Gauss Jordan");
-                        m = inversGauss.InversGauss(m);
-                        Matrix.tulisMatrix(m);
+                        mInv = inversGauss.InversGauss(m);
+                        Matrix.tulisMatrix(mInv);
                         System.out.println();
                         break;
                     case 2:
                         System.out.println("Matrix Invers Metode Kofaktor");
-                        m = Invers.InversCofactor(m);
-                        Matrix.tulisMatrix(m);
+                        mInv = Invers.InversCofactor(m);
+                        Matrix.tulisMatrix(mInv);
                         System.out.println();
                         break;
                 }
                 displayMenuSave();
                 opt = optionInput(1, 2);
+                Matrix.tulisMatrix(mInv);
                 switch(opt){
                     case 1:
                         System.out.println("Simpan Hasil");
+                        System.out.println("Masukkan nama file output\n>> ");
+                        String dir = scan.next();
+                        writeFile = File.writeInvers("../test/" + dir, m, mInv);
                         break;
                     case 2:
                         break;
@@ -199,6 +211,9 @@ class Main extends Menu{
                 switch(opt){
                     case 1:
                         System.out.println("Simpan Hasil");
+                        System.out.println("Masukkan nama file output\n>> ");
+                        String dir = scan.next();
+                        //writeFile = File.writeInterpolasi("../test/" + dir, m, mInv);
                         break;
                     case 2:
                         break;
