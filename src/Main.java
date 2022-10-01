@@ -256,6 +256,8 @@ class Main extends Menu{
                     default: m = Matrix.bacaMatrixSquare();
                 }
             case 7:
+                run = false;
+                System.out.println("Terima kasih");
         }
     }
     }

@@ -3,30 +3,37 @@ import java.util.*;
 
 public class File {
 
+
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args){
         String fileName;
         // int x = fileRow("D:/altha/Kuliah/Semester III/TubesAlgeo/Tubes-Algeo/test/text.txt");
         fileName= inputFileName();
-        int x = fileRow(fileName);
-        int y = fileCol(fileName);
-        System.out.println(y);
+        // int x = fileRow(fileName);
+        // int y = fileCol(fileName);
+        // System.out.println(y);
         double[][] m;
         m = fileMatrix(fileName);
         Matrix.tulisMatrix(m);
+        double[] spl = SPLSolver.splUniqueSol(m);
+        System.out.println(Arrays.toString(spl));
+        String[] splstr = SPLSolver.uniqueSol2Arr(spl);
+        writeSPLSol("re.txt", splstr);
+
     }
     
     public static String inputFileName(){
         // Mengembalikan path file input yang telah divalidasi
         String fileName;
-        String dir = System.getProperty("user.dir");
+        // String dir = System.getProperty("user.dir");
         // System.out.println(dir.replace('\\', '/'));
         FileReader file = null;
 
         System.out.println("Masukkan nama file");
         System.out.print(">>> ");
         fileName = scan.next();
-        fileName = dir.replace('\\', '/') + "/test/"+ fileName;
+        // fileName = dir.replace('\\', '/') + "/test/"+ fileName;
+        fileName = "../test/" +fileName;
         try {
             file = new FileReader(fileName);
         } catch (FileNotFoundException fe) {
