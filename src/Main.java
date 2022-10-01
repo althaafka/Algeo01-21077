@@ -289,7 +289,7 @@ class Main extends Menu{
                         String dir = scan.next();
                         dir = "../test/outputFile/" + dir;
                         System.out.println();
-                        File.writeBicubic(dir, a, b, fx );
+                        File.writeBicubic(dir, a, b, fx, m);
                         //writeFile = File.writeInterpolasi("../test/" + dir, m, mInv);
                         break;
                     case 2:
@@ -297,25 +297,41 @@ class Main extends Menu{
                 }
                 break;
             case 6:
-                System.out.println("Regresi Liniear");
-                displayMenuInput();
-                opt = optionInput(1,2);
-                switch(opt){
-                    case 1: //input keyboard
-                        //InterpolasiPolinom.inputInterpolasiFull();
-                        break;
-                    case 2: //input file
-                        // String fileName;
-                        // fileName = File.inputFileName();
-                        // System.out.println();
-                        // m = File.fileMatrix(fileName);
-                        // InterpolasiPolinom.interpolasiFile(m);
-                        // break;
-                    default: m = Matrix.bacaMatrixSquare();
-                }
+            System.out.println("Regresi Liniear");
+            displayMenuInput();
+            opt = optionInput(1,2);
+            output =new String[]{};
+            switch(opt){
+                case 1: //input keyboard
+                    System.out.println("Regresi Liniear");
+                    m = Matrix.bacaMatrix();
+                    output = RegMatrix.HasilRegresi(m);
+                    break;
+                case 2: //input file
+                    String fileName;
+                    fileName = File.inputFileName();
+                    System.out.println();
+                    m = File.fileMatrix(fileName);
+                    output = RegMatrix.HasilRegresi(m);
+                    break;
+                default: m = Matrix.bacaMatrixSquare();
+            }
+            displayMenuSave();
+            opt = optionInput(1, 2);
+            switch(opt){
+                case 1:
+                    System.out.println("Simpan Hasil");
+                    System.out.print("Masukkan nama file output\n>>> ");
+                    String dir = scan.next();
+                    File.writeRegresi(dir, output);
+                    break;
+                case 2:
+                    break;
+            }
+            break;
             case 7:
                 run = false;
-                System.out.println("Program berhenti. Terima kasih :) \n");
+                System.out.println("Program berhenti. Terima kasih :)");
         }
     }
     }

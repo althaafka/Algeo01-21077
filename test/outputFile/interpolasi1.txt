@@ -1,3 +1,3 @@
 Interpolasi menghasilkan persamaan 
 f(x) = 0.6762000000000091 + 0.22659999999999797x^1 + -0.006399999999999887x^2
-Dengan taksiran f(  9.2 ) = 2.219224
+Dengan taksiran f(9.2) = 2.219224

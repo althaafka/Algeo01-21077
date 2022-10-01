@@ -1,10 +1,26 @@
+import java.util.Arrays;
+
 import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardDownRightHandler;
 
 public class RegMatrix extends Matrix {
-    public static void HasilRegresi(double[][] m, double[][] m2){
+    public static String[] HasilRegresi(double[][] mat){
         //Menambahkan angka 1 di kolom pertama
         //Kemudian dijadikan matriks augmented bersamaan dengan Y 
-        double[][] m1,m3,m4;
+        String[] output = new String[3];
+        output[0] = "Persamaan Regresi Liniear yang diperoleh adalah";
+        double[][] m,m1,m2,m3,m4;
+        m = createMatrix(nBaris(mat), nKolom(mat)-1);
+        for (int i=0; i<nBaris(m);i++){
+            for(int j=0; j<nKolom(m);j++){
+                m[i][j] = mat[i][j+1];
+            }
+        }
+        m2 = createMatrix(nBaris(mat),  1);
+        for (int i=0; i<nBaris(m2);i++){
+            m2[i][0] = mat[i][0];
+        }
+        // tulisMatrix(m);
+        // tulisMatrix(m2);
         int i,j,k,l; 
         m1 = createMatrix(nBaris(m), nKolom(m)+2);
         m3 = createMatrix(nKolom(m)+1, nKolom(m)+2);
@@ -50,10 +66,12 @@ public class RegMatrix extends Matrix {
             }
         }
       
+        System.out.println("Dengan Normal Estimation Equation, diperoleh SPL: ");
         tulisMatrix(m3);
+        System.out.println();
 
         m4 = Gauss_Jordan.eselonBarisTereduksi(Gauss_Jordan.eselonBaris(m3));
-        tulisMatrix(m4);
+        // tulisMatrix(m4);
         double[] koefreg = new double[nKolom(m) + 1];
 
         for(i = 0; i <= nKolom(m);i++)
@@ -61,21 +79,25 @@ public class RegMatrix extends Matrix {
             koefreg[i] = m4[i][nKolom(m) + 1];
         }
         //Mengeluarkan persamaaan regresi linier berganda
-        System.out.println("persamaan regresi linier berganda adalah : ");
+        System.out.println("Persamaan regresi linier berganda adalah");
         System.out.printf("y = %f", koefreg[0]);
+        output[1] = "y = " + koefreg[0];
         for (i = 1; i < koefreg.length; i++) {
             if (koefreg[i] > 0) {
                 System.out.printf(" + %f x%d", koefreg[i], i);
+                output[1] += " + "+ koefreg[i] + " x" + i;
             } else {
-                System.out.printf(" %f x%d", koefreg[i], i);
+                System.out.printf(" + %f x%d", koefreg[i], i);
+                output[1] += " + "+ koefreg[i] + " x" + i;
             }
         }
+        System.out.println();
 
         //Penaksiran nilai fungsi 
         double[] Hasiltaksiran = new double[koefreg.length];
-        System.out.println("\n Menaksir nilai fungsi");
+        System.out.println("\nMenaksir nilai fungsi");
         
-        System.out.printf("Masukkan %d peubah ", koefreg.length - 1);
+        System.out.printf("Masukkan %d peubah: ", koefreg.length - 1);
         
         for (i = 0; i < koefreg.length - 1; i++) {
             Hasiltaksiran[i] = scan.nextDouble();
@@ -84,8 +106,10 @@ public class RegMatrix extends Matrix {
         for (i = 0; i < koefreg.length - 1; i++) {
             hasil += koefreg[i + 1] * Hasiltaksiran[i];
         }
-        System.out.printf("%f",hasil);
-
+        output[2]= "Hasil taksirannya adalah "+Double.toString(hasil);
+        System.out.printf("Hasil taksirannya adalah %f\n\n",hasil);
+       
+        return output;
 
     }
 
@@ -93,10 +117,15 @@ public class RegMatrix extends Matrix {
     }
 
     public static void main(String[] args) {
-        double[][] m,m2;
-        m = bacaMatrix();
-        m2 = createMatrix(nBaris(m), 1);
-        m2 = bacaMatrix();
-        HasilRegresi(m, m2);
+        String fileName;
+        fileName= File.inputFileName();
+        double[][] m;
+        m = File.fileMatrix(fileName);
+        Matrix.tulisMatrix(m);
+        // double[][] m,m2;
+        // m = bacaMatrix();
+        // m2 = createMatrix(nBaris(m), 1);
+        // m2 = bacaMatrix();
+        HasilRegresi(m);
     }
 }

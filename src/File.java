@@ -175,6 +175,7 @@ public class File {
             return false;
         }
     }
+    
 
     public static boolean writeInvers (String dir, double[][] m, double[][] mInverse){
         // Menuliskan hasil inverse matriks ke file
@@ -265,16 +266,42 @@ public class File {
         }
     }
 
-    public static boolean writeBicubic(String dir, double a, double b, double fx){
+    public static boolean writeBicubic(String dir, double a, double b, double fx, double[][] m){
         // Menuliskan hasil perhitungan Interpolasi Bicubic ke file
         try {
             FileWriter file = new FileWriter(dir);
             // Penulisan hasil taksiran bicubic
+            file.write("Interpolasi Bicubic\n");
+            for (int i=0; i<Matrix.nBaris(m); i++){
+                for (int j=0; j<Matrix.nKolom(m); j++){
+                    file.write(m[i][j] + " ");
+                }
+                file.write("\n");
+            }
             file.write("f( " + a + "," + b + ") = " + fx);
             // End Of File
             file.write("\n");
             file.close();
             System.out.println("Berhasil menyimpan hasil interpolasi bicubic di "+ dir+"\n");
+            return true;
+        } catch (IOException e){
+            System.out.println("[Error] Gagal menyimpan file.\n");
+            return false;
+        }
+    }
+
+    public static boolean writeRegresi (String dir, String[] SPLsolved){
+        // Menuliskan hasil penyelesaian SPL ke file
+        dir = "../test/outputFile/" + dir;
+        try {
+            FileWriter file = new FileWriter(dir);
+            for (String s : SPLsolved) {
+                file.write(s + "\n");
+            }
+            // End Of File
+            file.write("\n");
+            file.close();
+            System.out.println("Hasil penyelesaian Regresi telah tersimpan di "+dir+"\n");
             return true;
         } catch (IOException e){
             System.out.println("[Error] Gagal menyimpan file.\n");
