@@ -1,4 +1,4 @@
-class DeterminanGJ extends Matrix {
+public class DeterminanGJ extends Matrix {
     public static void main(String[] args) {
         // double[][] m;
         // m = createMatrix(10, 10);
