@@ -1,5 +1,4 @@
 import java.util.Arrays;
-
 public class Bicubic extends Matrix{
 
     public static void main(String[] args){
@@ -17,7 +16,6 @@ public class Bicubic extends Matrix{
         double[][] X = new double[16][16];
         int idxRow=0;
         int idxCol=0;
-        idxRow = 0;
         for (int y = -1; y<3; y++){
             for (int x =-1; x<3; x++){
                 idxCol =0;

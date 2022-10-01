@@ -29,12 +29,12 @@ public class InterpolasiPolinom extends Matrix {
         return mInput;
     }
 
-    public static double[][] InputtoAugmented(double[][] mInput){
+    public static double[][] InputtoAugmented(double[][] mInput) {
         // Mengubah input interpolasi polinom menjadi matriks augmented
-        double[][] mAug = createMatrix(nBaris(mInput), nBaris(mInput)+1);
-        for (int i=0; i<nBaris(mAug);i++) {
+        double[][] mAug = createMatrix(nBaris(mInput), nBaris(mInput) + 1);
+        for (int i = 0; i < nBaris(mAug); i++) {
             for (int j = 0; j < nKolom(mAug); j++) {
-                if (j == nKolom(mAug)-1) {
+                if (j == nKolom(mAug) - 1) {
                     mAug[i][j] = mInput[i][1];
                 } else {
                     mAug[i][j] = Math.pow(mInput[i][0], j);
@@ -43,9 +43,9 @@ public class InterpolasiPolinom extends Matrix {
         }
         return mAug;
     }
-
-    public static double[] resultPolinom(double[][] mInterpolasi){
-        double[] mResult = SPLSolver.splUniqueSol(Gauss.eselonBaris(mInterpolasi)); // Gunakan gauss hasilkan result
+    public static double[] resultPolinom(double[][] mInput){
+        double[][] mAug = InputtoAugmented(mInput);
+        double[] mResult = SPLSolver.splUniqueSol(Gauss.eselonBaris(mAug)); // Gunakan gauss hasilkan result
         return mResult;
     }
 
@@ -70,7 +70,6 @@ public class InterpolasiPolinom extends Matrix {
                 } else{
                     if(!first) {
                         System.out.print(" + ");
-                        first = false;
                     }
                     System.out.print(mRes[i] + " x^"+ (i) );
                     first = false;
@@ -88,14 +87,18 @@ public class InterpolasiPolinom extends Matrix {
         }
         System.out.println();
     }
-    public static void inputInterpolasiFull(){
+    public static double[][] inputInterpolasiKey(){
         System.out.print("Banyak titik: ");
         int n = scan.nextInt();
         while (n<0){
             System.out.println("Banyak titik harus >0");
             n = scan.nextInt();
         }
-        double[][] mInt, mAug;
+        double[][] mInt = inputInterpolasi(n);
+
+        return mInt;
+
+        /*
         double[] mRes;
         mInt = inputInterpolasi(n);
         mAug = InputtoAugmented(mInt);
@@ -107,19 +110,21 @@ public class InterpolasiPolinom extends Matrix {
         displayFx(mRes);
         System.out.println("f("+x+") = " + result);
         System.out.println();
-    }
 
-    public static void interpolasiFile(double[][] m){
-        double[][] mInt, mAug;
-        double[] mRes;
-        mInt = m;
-        mAug = InputtoAugmented(mInt);
-        mRes = resultPolinom(mAug);
-        displayFx(mRes);
-        System.out.print("Nilai x yang akan dicari: ");
-        double x = scan.nextDouble();
-        double result = EstimasiFungsi(mRes, x);
-        System.out.println("f("+x+") = " + result);
-        System.out.println();
+        return x;
+        */
+    }
+    public static double[][] fileMatrixInterpolasi(double[][] m){
+        double[][] output = createMatrix(nBaris(m)-1, nKolom(m));
+        for (int i=0; i < nBaris(output);i++){
+            for (int j=0; j < nKolom(output); j++){
+                output[i][j] = m[i][j];
+            }
+        }
+        return output;
+    }
+    public static double findVal(double[][] m){
+        double val = m[nBaris(m)-1][0];
+        return val;
     }
 }

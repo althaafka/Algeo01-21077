@@ -3,7 +3,8 @@ class Main extends Menu{
 
         int opt;
         double[][] m, mInv;
-        double det = 0;
+        double[] mRes = new double[] {}, ab = new double[]{};
+        double det = 0, x = 0, yEstimate = 0, a, b, fx;
         boolean run=true;
         boolean writeFile = false;
         while (run){
@@ -76,7 +77,8 @@ class Main extends Menu{
                 switch(opt){
                     case 1:
                         System.out.println("Simpan Hasil");
-                        System.out.println("Masukkan nama file output\n>>> ");
+                        System.out.println("Masukkan nama file output");
+                        System.out.print(">>> ");
                         String dir = scan.next();
                         System.out.println();
                         File.writeSPLSol(dir, output);
@@ -130,10 +132,12 @@ class Main extends Menu{
                 opt = optionInput(1, 2);
                 switch(opt){
                     case 1:
-                        System.out.println("det "+ det +"\n");
-                        System.out.println("Masukkan nama file output\n>> ");
+                        System.out.println("Simpan Hasil");
+                        System.out.println("Masukkan nama file output");
+                        System.out.print(">>> ");
                         String dir = scan.next();
-                        writeFile = File.writeDeterminan("../test/" + dir, m, det );
+                        System.out.println();
+                        File.writeDeterminan(dir, m, det);
                         break;
                     case 2:
                         break;
@@ -144,51 +148,60 @@ class Main extends Menu{
                 valid = false;
                 m = new double[][] {};
                 while (!valid){
-                displayMenuInput();
-                opt = optionInput(1,2);
-                switch(opt){
-                    case 1: //input keyboard
-                        m = Matrix.bacaMatrixSquare();
-                        valid = true;
-                        break;
-                    case 2: //input file
-                        String fileName;
-                        fileName = File.inputFileName();
-                        m = File.fileMatrix(fileName);
-                        if (Matrix.nBaris(m)!=Matrix.nKolom(m)) {
-                            System.out.println("Maaf Matrix harus matrix persegi");
-                            System.out.println();
-                        } else {valid = true;}
-                        break;
-                    default: m = Matrix.bacaMatrixSquare();
+                    displayMenuInput();
+                    opt = optionInput(1,2);
+                    switch(opt){
+                        case 1: //input keyboard
+                            m = Matrix.bacaMatrixSquare();
+                            valid = true;
+                            break;
+                        case 2: //input file
+                            String fileName;
+                            fileName = File.inputFileName();
+                            m = File.fileMatrix(fileName);
+                            if (Matrix.nBaris(m)!=Matrix.nKolom(m)) {
+                                System.out.println("Maaf Matrix harus matrix persegi");
+                                System.out.println();
+                            } else {valid = true;}
+                            break;
+                        default: m = Matrix.bacaMatrixSquare();
+                    }
                 }
-                }
-                displayMenuInverse();
-                opt = optionInput(1, 2);
                 mInv = Matrix.createMatrix(Matrix.nBaris(m), Matrix.nKolom(m));
-                switch(opt){
-                    case 1: //el gaus jordan
-                        System.out.println("Matrix Invers Metode Gauss Jordan");
-                        mInv = inversGauss.InversGauss(m);
-                        Matrix.tulisMatrix(mInv);
-                        System.out.println();
-                        break;
-                    case 2:
-                        System.out.println("Matrix Invers Metode Kofaktor");
-                        mInv = Invers.InversCofactor(m);
-                        Matrix.tulisMatrix(mInv);
-                        System.out.println();
-                        break;
+                if (Determinan.determinan(m) == 0){
+                    System.out.println("Determinan matriks 0 sehingga matriks tidak memiliki invers.\n");
+                } else {
+                    displayMenuInverse();
+                    opt = optionInput(1, 2);
+                    mInv = Matrix.createMatrix(Matrix.nBaris(m), Matrix.nKolom(m));
+                    switch(opt){
+                        case 1: //el gaus jordan
+                            System.out.println("Matrix Invers Metode Gauss Jordan");
+                            mInv = inversGauss.InversGauss(m);
+                            Matrix.tulisMatrix(mInv);
+                            System.out.println();
+                            break;
+                        case 2:
+                            System.out.println("Matrix Invers Metode Kofaktor");
+                            mInv = Invers.InversCofactor(m);
+                            Matrix.tulisMatrix(mInv);
+                            System.out.println();
+                            break;
+                    }
                 }
+
                 displayMenuSave();
                 opt = optionInput(1, 2);
-                Matrix.tulisMatrix(mInv);
                 switch(opt){
                     case 1:
                         System.out.println("Simpan Hasil");
-                        System.out.println("Masukkan nama file output\n>> ");
+                        System.out.println("Masukkan nama file output");
+                        System.out.print(">>> ");
                         String dir = scan.next();
-                        writeFile = File.writeInvers("../test/" + dir, m, mInv);
+                        dir = "../test/outputFile/" + dir;
+                        System.out.println();
+                        if (det != 0) File.writeInvers(dir, m, mInv);
+                        else File.writeFailInverse(dir, m); // det==0
                         break;
                     case 2:
                         break;
@@ -200,24 +213,37 @@ class Main extends Menu{
                 opt = optionInput(1,2);
                 switch(opt){
                     case 1: //input keyboard
-                        InterpolasiPolinom.inputInterpolasiFull();
+                        m = InterpolasiPolinom.inputInterpolasiKey();
+                        System.out.print("Nilai x yang akan dicari: ");
+                        x = scan.nextDouble();
                         break;
                     case 2: //input file
                         String fileName;
                         fileName = File.inputFileName();
-                        System.out.println();
                         m = File.fileMatrix(fileName);
-                        InterpolasiPolinom.interpolasiFile(m);
+                        // System.out.println(Matrix.nBaris(m) + " " + Matrix.nKolom(m) + "\n");
+                        x = InterpolasiPolinom.findVal(m);
+                        m = InterpolasiPolinom.fileMatrixInterpolasi(m);
                         break;
                     default: m = Matrix.bacaMatrixSquare();
                 }
+                mRes = InterpolasiPolinom.resultPolinom(m);
+                yEstimate = InterpolasiPolinom.EstimasiFungsi(mRes, x);
+                InterpolasiPolinom.displayFx(mRes);
+                System.out.println("f("+x+") = " + yEstimate);
+                System.out.println();
+
                 displayMenuSave();
                 opt = optionInput(1, 2);
                 switch(opt){
                     case 1:
                         System.out.println("Simpan Hasil");
-                        System.out.println("Masukkan nama file output\n>> ");
+                        System.out.println("Masukkan nama file output");
+                        System.out.print(">>> ");
                         String dir = scan.next();
+                        dir = "../test/outputFile/" + dir;
+                        System.out.println();
+                        File.writeInterpolasi(dir, mRes, x, yEstimate );
                         //writeFile = File.writeInterpolasi("../test/" + dir, m, mInv);
                         break;
                     case 2:
@@ -233,12 +259,7 @@ class Main extends Menu{
                         System.out.println("Bicubic Interpolation");
                         System.out.println("Input Matrix 4x4");
                         m = Bicubic.bacaMatrixBicubic();
-                        double[] ab = Bicubic.bacaABBicubic();
-                        double a = ab[0];
-                        double b = ab[1];
-                        double fx = Bicubic.bicubic(m, a, b);
-                        System.out.println();
-                        System.out.println("f("+a+","+b+") = "+fx);
+                        ab = Bicubic.bacaABBicubic();
                         System.out.println();
                         break;
                     case 2: //input file
@@ -247,15 +268,32 @@ class Main extends Menu{
                         m = File.fileMatrix(fileName);
                         ab = Bicubic.fileABBicubic(m);
                         m = Bicubic.fileMatrixBicubic(m);
-                        a = ab[0];
-                        b = ab[1];
-                        fx = Bicubic.bicubic(m, a, b);
-                        System.out.println("f("+a+","+b+") = "+fx);
-                        System.out.println();
                         break;
                         // InterpolasiPolinom.interpolasiFile(m);
                         // break;
                     default: m = Matrix.bacaMatrixSquare();
+                }
+                a = ab[0];
+                b = ab[1];
+                fx = Bicubic.bicubic(m, a, b);
+                System.out.println("f("+a+","+b+") = "+fx);
+                System.out.println();
+
+                displayMenuSave();
+                opt = optionInput(1, 2);
+                switch(opt){
+                    case 1:
+                        System.out.println("Simpan Hasil");
+                        System.out.println("Masukkan nama file output");
+                        System.out.print(">>> ");
+                        String dir = scan.next();
+                        dir = "../test/outputFile/" + dir;
+                        System.out.println();
+                        File.writeBicubic(dir, a, b, fx );
+                        //writeFile = File.writeInterpolasi("../test/" + dir, m, mInv);
+                        break;
+                    case 2:
+                        break;
                 }
                 break;
             case 6:
@@ -264,7 +302,7 @@ class Main extends Menu{
                 opt = optionInput(1,2);
                 switch(opt){
                     case 1: //input keyboard
-                        InterpolasiPolinom.inputInterpolasiFull();
+                        //InterpolasiPolinom.inputInterpolasiFull();
                         break;
                     case 2: //input file
                         // String fileName;
@@ -277,7 +315,7 @@ class Main extends Menu{
                 }
             case 7:
                 run = false;
-                System.out.println("Terima kasih");
+                System.out.println("Program berhenti. Terima kasih :) \n");
         }
     }
     }

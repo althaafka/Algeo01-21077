@@ -112,11 +112,12 @@ public class File {
     }
     public static boolean writeFile(String dir, double[][] m){
         // Menuliskan hasil operasi matriks ke file.
+        dir = "../test/outputFile/" + dir;
         try {
             FileWriter file = new FileWriter(dir);
             for (int i=0; i<Matrix.nBaris(m); i++){
                 for(int j=0; i<Matrix.nKolom(m); j++) {
-                    file.write(Double.toString(m[i][j]) +" ");
+                    file.write(m[i][j] +" ");
                 }
                 file.write("\n");
             }
@@ -133,6 +134,7 @@ public class File {
 
     public static boolean writeSPLSol (String dir, String[] SPLsolved){
         // Menuliskan hasil penyelesaian SPL ke file
+        dir = "../test/outputFile/" + dir;
         try {
             FileWriter file = new FileWriter(dir);
             for (String s : SPLsolved) {
@@ -151,17 +153,20 @@ public class File {
 
     public static boolean writeDeterminan(String dir, double[][] m, double det){
         // Menuliskan hasil perhitungan determinan matriks ke file
+        dir = "../test/outputFile/" + dir;
         try {
             FileWriter file = new FileWriter(dir);
             file.write("Hasil determinan matriks \n");
+            file.write("\n");
             for (int i=0; i<Matrix.nBaris(m); i++){
                 for (int j=0; j<Matrix.nKolom(m); j++){
-                    file.write(Double.toString(m[i][j]) + " ");
+                    file.write(m[i][j] + " ");
                 }
                 file.write("\n");
             }
+            file.write("\n");
             // End Of File
-            file.write("adalah" + Double.toString(det) + "\n");
+            file.write("adalah " + det + "\n");
             file.close();
             System.out.println("Hasil determinan telah tersimpan di " + dir + "\n");
             return true;
@@ -175,26 +180,28 @@ public class File {
         // Menuliskan hasil inverse matriks ke file
         try {
             FileWriter file = new FileWriter(dir);
-            file.write("Inverse matriks ");
+            file.write("Inverse dari matriks \n");
             for (int i=0; i<Matrix.nBaris(m); i++){
                 for (int j=0; j<Matrix.nKolom(m); j++){
-                    file.write(Double.toString(m[i][j]) + " ");
+                    file.write(m[i][j] + " ");
                 }
                 file.write("\n");
             }
+            file.write("\n");
             // End Of File
             file.write("adalah \n");
+            file.write("\n");
             for (int i=0; i<Matrix.nBaris(mInverse); i++){
                 for (int j=0; j<Matrix.nKolom(mInverse); j++){
-                    file.write(Double.toString(mInverse[i][j]) + " ");
+                    file.write(mInverse[i][j] + " ");
                 }
                 file.write("\n");
             }
             file.close();
-            System.out.println("Inverse matriks telah tersimpan di " + dir);
+            System.out.println("Inverse matriks telah tersimpan di " + dir +"\n");
             return true;
         } catch (IOException e) {
-            System.out.println("[Error] Gagal menyimpan file.");
+            System.out.println("[Error] Gagal menyimpan file.\n");
             return false;
         }
     }
@@ -204,37 +211,39 @@ public class File {
         // Menuliskan pesan error matriks tidak memiliki inverse
         try {
             FileWriter file = new FileWriter(dir);
-            file.write("Determinan matriks ");
+            file.write("Determinan matriks\n");
             for (int i=0; i<Matrix.nBaris(m); i++){
                 for (int j=0; j<Matrix.nKolom(m); j++){
-                    file.write(Double.toString(m[i][j]) + " ");
+                    file.write(m[i][j] + " ");
                 }
                 file.write("\n");
             }
+            file.write("\n");
             file.write("adalah 0, sehingga matriks tidak memiliki Inverse \n");
+            System.out.println("Inverse matriks telah tersimpan di " + dir +"\n");
             file.close();
             return true;
         } catch (IOException e){
-            System.out.println("[Error] Gagal menyimpan file.");
+            System.out.println("[Error] Gagal menyimpan file.\n");
             return false;
         }
     }
 
-    public static boolean writeInterpolasi(String dir, double[][] a, double findValOf, double estimateVal){
+    public static boolean writeInterpolasi(String dir, double[] a, double findValOf, double estimateVal){
         // Menuliskan hasil perhitungan Interpolasi ke file
         try {
             FileWriter file = new FileWriter(dir);
             file.write("Interpolasi menghasilkan persamaan \nf(x) = ");
             boolean a0 = true;
-            for (int i = 0; i<Matrix.nBaris(a); i++){
-                if (!(Matrix.isZero(a[i][0]))) {
+            for (int i = 0; i<a.length; i++){
+                if (!(Matrix.isZero(a[i]))) {
                     if (a0){
                         // a[i] koefisien pertama sehingga tidak perlu diawali +
                         a0 = false;
                     } else {
                         file.write(" + ");
                     }
-                    file.write(Double.toString(a[i][0]));
+                    file.write(Double.toString(a[i]));
                     if (i != 0){
                         file.write("x^");
                         file.write(Integer.toString(i));
@@ -244,11 +253,28 @@ public class File {
             // End Penulisan polinom
             file.write("\n");
             // Penulisan hasil taksiran
-            file.write("Dengan taksiran f(  " + Double.toString(findValOf) + " ) = " + Double.toString(estimateVal));
+            file.write("Dengan taksiran f(" + findValOf + ") = " + estimateVal);
             // End Of File
             file.write("\n");
             file.close();
             System.out.println("Berhasil menyimpan hasil interpolasi di "+ dir+"\n");
+            return true;
+        } catch (IOException e){
+            System.out.println("[Error] Gagal menyimpan file.\n");
+            return false;
+        }
+    }
+
+    public static boolean writeBicubic(String dir, double a, double b, double fx){
+        // Menuliskan hasil perhitungan Interpolasi Bicubic ke file
+        try {
+            FileWriter file = new FileWriter(dir);
+            // Penulisan hasil taksiran bicubic
+            file.write("f( " + a + "," + b + ") = " + fx);
+            // End Of File
+            file.write("\n");
+            file.close();
+            System.out.println("Berhasil menyimpan hasil interpolasi bicubic di "+ dir+"\n");
             return true;
         } catch (IOException e){
             System.out.println("[Error] Gagal menyimpan file.\n");

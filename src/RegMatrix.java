@@ -1,3 +1,5 @@
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardDownRightHandler;
+
 public class RegMatrix extends Matrix {
     public static void HasilRegresi(double[][] m, double[][] m2){
         //Menambahkan angka 1 di kolom pertama
@@ -50,19 +52,44 @@ public class RegMatrix extends Matrix {
       
         tulisMatrix(m3);
 
-        m4 = Gauss_Jordan.eselonBarisTereduksi(m3);
-        tulisMatrix(m3);
+        m4 = Gauss_Jordan.eselonBarisTereduksi(Gauss_Jordan.eselonBaris(m3));
+        tulisMatrix(m4);
         double[] koefreg = new double[nKolom(m) + 1];
 
         for(i = 0; i <= nKolom(m);i++)
         {
             koefreg[i] = m4[i][nKolom(m) + 1];
-            System.out.println(koefreg[i]);
-            System.out.println("\n");
-    
         }
-        
+        //Mengeluarkan persamaaan regresi linier berganda
+        System.out.println("persamaan regresi linier berganda adalah : ");
+        System.out.printf("y = %f", koefreg[0]);
+        for (i = 1; i < koefreg.length; i++) {
+            if (koefreg[i] > 0) {
+                System.out.printf(" + %f x%d", koefreg[i], i);
+            } else {
+                System.out.printf(" %f x%d", koefreg[i], i);
+            }
+        }
 
+        //Penaksiran nilai fungsi 
+        double[] Hasiltaksiran = new double[koefreg.length];
+        System.out.println("\n Menaksir nilai fungsi");
+        
+        System.out.printf("Masukkan %d peubah ", koefreg.length - 1);
+        
+        for (i = 0; i < koefreg.length - 1; i++) {
+            Hasiltaksiran[i] = scan.nextDouble();
+        }
+        double hasil = koefreg[0];
+        for (i = 0; i < koefreg.length - 1; i++) {
+            hasil += koefreg[i + 1] * Hasiltaksiran[i];
+        }
+        System.out.printf("%f",hasil);
+
+
+    }
+
+    private static void println(String string, double d, int i) {
     }
 
     public static void main(String[] args) {
