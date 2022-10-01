@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TubesCode:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TubesCode_jar</output-path>
+    <root id="archive" name="TubesCode.jar">
+      <element id="module-output" name="TubesCode" />
+    </root>
+  </artifact>
+</component>
