@@ -215,6 +215,21 @@ public class Matrix {
         return mKali;
     }
 
+    public static double[][] matEfektif (double[][] m){
+        // mengembalikan matrix m tanpa baris 0
+        int roweff = nBaris(m);
+        for (int i=0; i<nBaris(m); i++){
+            if(isRowZero(m, i)) roweff--;
+        }
+        double[][] output = createMatrix(roweff, nKolom(m));
+        for (int i=0;i<nBaris(output);i++){
+            for (int j=0; j<nKolom(output);j++){
+                output[i][j] = m[i][j];
+            }
+        }
+        return output;
+    }
+
     
 }
 

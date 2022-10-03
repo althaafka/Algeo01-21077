@@ -32,6 +32,7 @@ public class SPLSolver extends Matrix {
     }
     public static String[] splSolution(double[][] m){
         int solution;
+        m = matEfektif(m);
         solution = whatSolution(m);
         String[] output = new String[] {"SPL tidak memiliki solusi"};
         switch (solution){
@@ -60,11 +61,11 @@ public class SPLSolver extends Matrix {
         for (int i=nBaris(m)-1; i>=0; i--){
             result[i] = m[i][nKolom(m)-1];
             for (int j=i+1;j<nKolom(m)-1;j++){
-                if (!isZero(m[i][j])){
+                // if (!isZero(m[i][j])){
                     if (i!=nBaris(m)-1){
                         result[i]-= m[i][j]*result[j];
                     }
-                }
+                // }
             }
         }
         return result;
@@ -192,6 +193,7 @@ public class SPLSolver extends Matrix {
             for (int i=0; i<nBaris(result); i++){
                 str = "X"+ Integer.toString(i+1)+ " = ";
                 first = true;
+                if (isRowZero(result, i)) str+= "0";
                 for (int j=0; j<nKolom(result); j++){
                     if (!isZero(result[i][j])){
                         if(j==nKolom(result)-1){
