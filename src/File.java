@@ -33,6 +33,7 @@ public class File {
         System.out.println("Masukkan nama file");
         System.out.print(">>> ");
         fileName = scan.next();
+        System.out.println();
         // fileName = dir.replace('\\', '/') + "/test/"+ fileName;
         fileName = "../test/" +fileName;
         try {

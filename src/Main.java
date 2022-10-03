@@ -331,7 +331,7 @@ class Main extends Menu{
             break;
             case 7:
                 run = false;
-                System.out.println("Program berhenti. Terima kasih :)");
+                System.out.println("Program berhenti. Terima kasih :)\n");
         }
     }
     }
