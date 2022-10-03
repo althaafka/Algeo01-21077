@@ -1,21 +1,7 @@
 import java.util.Arrays;
 
 public class InterpolasiPolinom extends Matrix {
-    public static void main(String[] args){
-        double[][] mInt, mAug;
-        double[] mRes;
-        int n = scan.nextInt();
-        mInt = inputInterpolasi(n);
-        tulisMatrix(mInt);
-        mAug = InputtoAugmented(mInt);
-        tulisMatrix(mAug);
-        mRes = resultPolinom(mAug);
-        System.out.println(Arrays.toString(mRes));
-        // Input nilai x untuk estimasi
-        double x = scan.nextDouble();
-        double result = EstimasiFungsi(mRes, x);
-        System.out.println("Hasil " + result);
-    }
+
     public static double[][] inputInterpolasi(int n){
         double[][] mInput = createMatrix(n, 2);
         for (int i=0; i<nBaris(mInput);i++){

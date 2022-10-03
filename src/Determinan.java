@@ -1,10 +1,5 @@
 public class Determinan extends Matrix {
-    public static void main(String[] args){
-        double[][] m1;
-        m1 = bacaMatrix();
-        tulisMatrix(m1);
-        System.out.println("hasil " + Determinan.determinan(m1));
-    }
+
     public static double[][] ElmtCofactor (double[][] m, int row, int col){
         // Menghasilkan elemen matriks kofaktor [row][col]
         // Prekondisi m persegi dan nBaris > 1 nKolom > 1

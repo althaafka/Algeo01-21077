@@ -116,16 +116,5 @@ public class RegMatrix extends Matrix {
     private static void println(String string, double d, int i) {
     }
 
-    public static void main(String[] args) {
-        String fileName;
-        fileName= File.inputFileName();
-        double[][] m;
-        m = File.fileMatrix(fileName);
-        Matrix.tulisMatrix(m);
-        // double[][] m,m2;
-        // m = bacaMatrix();
-        // m2 = createMatrix(nBaris(m), 1);
-        // m2 = bacaMatrix();
-        HasilRegresi(m);
-    }
+
 }

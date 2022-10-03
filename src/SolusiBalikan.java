@@ -1,14 +1,7 @@
 import java.util.Arrays;
 
 public class SolusiBalikan extends Matrix{
-    public static void main(String[] args){
-        double[][] m1;
-        double[] res;
-        m1 = bacaMatrix();
-        tulisMatrix(m1);
-        res = SolusiBalikan.SolveBalikan(m1);
-        System.out.println(Arrays.toString(res));
-    }
+
     public static double[] SolveBalikan(double[][] A){
         // Prekondisi A selalu augmented
         // x = A^(-1)b
