@@ -47,7 +47,11 @@ class Main extends Menu{
                         break;
                     case 3: //matriks invers
                         System.out.println("SPL Metode Matrix Inverse");
-                        if (DeterminanGJ.determiananGaussJordan(Matrix.AugmentedtoSquare(m))==0 || Matrix.nBaris(m)!= Matrix.nKolom(m) ){
+                        if (Matrix.nBaris(m)!= (Matrix.nKolom(m)-1) ) {
+                            System.out.println("Matrix harus persegi!");
+                            System.out.println("Matrix tidak dapat diselesaikan dengan metode ini");
+                            System.out.println();
+                        } else if (DeterminanGJ.determiananGaussJordan(Matrix.AugmentedtoSquare(m))==0){
                             System.out.println("Matrix memiliki determinan = 0");
                             System.out.println("Matrix tidak dapat diselesaikan dengan metode ini");
                             System.out.println();
@@ -59,7 +63,11 @@ class Main extends Menu{
                         break;
                     case 4: //crammer
                         System.out.println("SPL Metode Crammer");
-                        if (DeterminanGJ.determiananGaussJordan(Matrix.AugmentedtoSquare(m))==0 || Matrix.nBaris(m)!= Matrix.nKolom(m)){
+                        if (Matrix.nBaris(m)!= (Matrix.nKolom(m)-1) ) {
+                            System.out.println("Matrix harus persegi!");
+                            System.out.println("Matrix tidak dapat diselesaikan dengan metode ini");
+                            System.out.println();
+                        } else if  (DeterminanGJ.determiananGaussJordan(Matrix.AugmentedtoSquare(m))==0 || Matrix.nBaris(m)!= Matrix.nKolom(m)){
                             System.out.println("Matrix memiliki determinan = 0");
                             System.out.println("Matrix tidak dapat diselesaikan dengan metode ini");
                             System.out.println();
