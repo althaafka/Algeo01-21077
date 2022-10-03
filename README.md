@@ -24,8 +24,8 @@ Pada repository ini terdapat enam folder:
 ## Cara menjalankan program
 ### Install tools yang dibutuhkan 
 Sebelum menjalankan program, perlu untuk menginstall tools:
-1. Java \t\t : https://www.java.com/en/download/
-2. Java Development Kit(JDK) \t : https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
+1. Java  : https://www.java.com/en/download/
+2. Java Development Kit(JDK)  : https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
 
 ### Eksekusi Program
 1. Clone repositori dari git : 
