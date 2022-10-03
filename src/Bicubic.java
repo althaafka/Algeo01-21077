@@ -1,18 +1,8 @@
 import java.util.Arrays;
 public class Bicubic extends Matrix{
 
-    public static void main(String[] args){
-        double[][] m;
-        String fileName;
-        fileName = File.inputFileName();
-        m = File.fileMatrix(fileName);
-        // m = bacaMatrix();
-        tulisMatrix(m);
-        System.out.println();
-        bicubic(m,0.5,0.5);
-    }
-
     public static double bicubic(double[][] m,double a,double b){
+        // Mengembalikan nilai f(a,b) melalui metode bicubic interpolation
         double[][] X = new double[16][16];
         int idxRow=0;
         int idxCol=0;
@@ -58,6 +48,7 @@ public class Bicubic extends Matrix{
 
     }
     static public double[][] bacaMatrixBicubic(){
+        // input Matrix 4x4 melalui keyboard
         double [][] m;
         m = createMatrix(4, 4);
         for (int i=0; i<4;i++){
@@ -69,6 +60,7 @@ public class Bicubic extends Matrix{
         return m;
     }
     static public double[] bacaABBicubic(){
+        // input nilai a,b melalui keyboard
         double[] ab = new double[2];
         System.out.print("a: ");
         double a = scan.nextDouble();
@@ -88,6 +80,7 @@ public class Bicubic extends Matrix{
 
 
     static public double[][] fileMatrixBicubic(double[][] m){
+        // mengembalikan Matrix 4x4 dari matrix inputan file
         double[][] output = new double[4][4];
         for (int i=0; i<4;i++){
             for (int j=0; j<4; j++){
@@ -98,6 +91,7 @@ public class Bicubic extends Matrix{
     }
 
     static public double[] fileABBicubic(double[][] m){
+        // mengembalikan nilai a,b dari matrix inputan file
         double[] ab = new double[2];
         ab[0] = m[4][0];
         ab[1] = m[4][1];

@@ -5,26 +5,9 @@ public class File {
 
 
     static Scanner scan = new Scanner(System.in);
-    public static void main(String[] args){
-        String fileName;
-        // int x = fileRow("D:/altha/Kuliah/Semester III/TubesAlgeo/Tubes-Algeo/test/text.txt");
-        fileName= inputFileName();
-        // int x = fileRow(fileName);
-        // int y = fileCol(fileName);
-        // System.out.println(y);
-        double[][] m;
-        m = fileMatrix(fileName);
-        Matrix.tulisMatrix(m);
-        m = Gauss.eselonBaris(m);
-        double[] spl = SPLSolver.splUniqueSol(m);
-        System.out.println(Arrays.toString(spl));
-        String[] splstr = SPLSolver.uniqueSol2Arr(spl);
-        writeSPLSol("re.txt", splstr);
 
-    }
-    
     public static String inputFileName(){
-        // Mengembalikan path file input yang telah divalidasi
+        // Mengembalikan nama file input yang telah divalidasi
         String fileName;
         // String dir = System.getProperty("user.dir");
         // System.out.println(dir.replace('\\', '/'));
@@ -48,6 +31,7 @@ public class File {
     }
 
     public static int fileRow(String fileName){
+        // mengembalikan jumlah baris matrix yang ada dalam file
         FileReader file = null;
         try {
             file = new FileReader(fileName);
@@ -66,6 +50,7 @@ public class File {
     }
 
     public static int fileCol(String fileName){
+        // mengembalikan jumlah kolom matrix yang ada dalam file
         FileReader file = null;
         try {
             file = new FileReader(fileName);
@@ -86,6 +71,7 @@ public class File {
     }
 
     public static double[][] fileMatrix(String fileName){
+        // mengembalikan matrix yang ada dalam file
         FileReader file = null;
         try {
             file = new FileReader(fileName);

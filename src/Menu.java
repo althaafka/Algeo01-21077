@@ -54,12 +54,14 @@ public class Menu {
     }
 
     public static void displayMenuInput(){
+        // Menampilkan submenu input
         System.out.println("Input Data Matrix");
         System.out.println("1. Input Keyboard");
         System.out.println("2. Input File");
     }
 
     public static void displayMenuSave(){
+        // Menampilkan submenu save
         System.out.println("Ingin menyimpan file?");
         System.out.println("1. Ya");
         System.out.println("2. Tidak, kembali ke menu utama");

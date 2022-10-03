@@ -47,7 +47,7 @@ class Main extends Menu{
                         break;
                     case 3: //matriks invers
                         System.out.println("SPL Metode Matrix Inverse");
-                        if (DeterminanGJ.determiananGaussJordan(Matrix.AugmentedtoSquare(m))==0 || Matrix.nBaris(m)!= Matrix.nKolom(m) ){
+                        if (DeterminanGJ.determiananGaussJordan(Matrix.AugmentedtoSquare(m))==0 ){
                             System.out.println("Matrix memiliki determinan = 0");
                             System.out.println("Matrix tidak dapat diselesaikan dengan metode ini");
                             System.out.println();

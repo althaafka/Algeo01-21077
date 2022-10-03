@@ -2,41 +2,7 @@ import java.util.Arrays;
 
 public class Gauss extends Matrix{
 
-    public static void main(String[] args){
-        // double[][] m;
-        // double[] spl;
-        // int[] a = new int[]{0,-1};
-        // int[] b;
-        // m = bacaMatrix();
-        // // m = eselonBaris(m);
-        // System.out.println();
-        // tulisMatrix(m);
-        // // m = eselonBaris(m);
-        // // tulisMatrix(m);
-        // // spl = SPLSolver.splUniqueSol(m);
-        // // System.out.println(Arrays.toString(spl));
-        // // m = Gauss_Jordan.eselonBarisTereduksi(eselonBaris(m));
-        // // System.out.println();
-        // m = eselonBaris(m);
-        // System.out.println();
-        // tulisMatrix(m);
-        // System.out.println();
-        // // b = idxLeadingOne(m, a);
-        // // System.out.println(Arrays.toString(b));
-        // // if (isRowZero(m,2)) System.out.println("zero");
-        // SPLSolver.splSolution(m);
 
-        String fileName;
-        fileName= File.inputFileName();
-        // int x = fileRow(fileName);
-        // int y = fileCol(fileName);
-        // System.out.println(y);
-        double[][] m;
-        m = File.fileMatrix(fileName);
-        Matrix.tulisMatrix(m);
-        m = eselonBaris(m);
-        SPLSolver.splSolution(m);
-    }
     public static double[][] eselonBaris(double[][] m){
         int [] pivot = new int[] {-1,-1};
 

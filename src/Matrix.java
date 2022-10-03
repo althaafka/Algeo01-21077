@@ -4,26 +4,6 @@ public class Matrix {
 
     static Scanner scan = new Scanner(System.in);
 
-    public static void main(String[] args){
-        double[][] m,m2;
-        // m = createMatrix(3, 7);
-        // System.out.println(nBaris(m));
-        // System.out.println(nKolom(m));
-        m2 = bacaMatrix();
-        tulisMatrix(m2);
-        System.out.println();
-        // m2 = swapBaris(m2, 1, 0);
-        // System.out.println();
-        // tulisMatrix(m2);
-        // m2 = kaliBaris(m2, 2, 10);
-        // System.out.println();
-        // tulisMatrix(m2);
-        m2 = barisKurangNBaris(m2, 1, 0, 5);
-        System.out.println();
-        tulisMatrix(m2);
-
-    }
-
     public static double[][] createMatrix(int nrow, int ncol){
         // Mengembalikan matriks dengan ukuran baris nrow dan ukuran kolom ncol
         double[][] m = new double[nrow][ncol];
@@ -103,34 +83,6 @@ public class Matrix {
         }
     }
 
-    // public static double tulisMatrixB(double[][] b){
-    //     int nrow, ncol;
-    //     double [][] m;
-    //     System.out.println("Masukkan ukuran matriks");
-    //     System.out.print("Jumlah baris: ");
-    //     nrow = scan.nextInt();
-    //     System.out.print("Jumlah kolom: ");
-    //     ncol = scan.nextInt();
-    //     while (nrow<=0 || ncol<=0){
-    //         System.out.println("Masukkan invalid. Ukuran baris dan kolom harus >0");
-    //         System.out.print("Jumlah baris: ");
-    //         nrow = scan.nextInt();
-    //         System.out.print("Jumlah kolom: ");
-    //         ncol = scan.nextInt();
-    //     }
-    //     m = createMatrix(nrow, ncol);
-    //     System.out.println("Masukan elemen matriks");
-    //     for (int i=0; i<nrow;i++){
-    //         for (int j=0; j<ncol; j++){
-    //             System.out.print("Elemen M["+i+"]["+j+"]: ");
-    //             m[i][j] = scan.nextDouble();
-
-    //         }
-    //     }
-    //     return m;
-            
-    //     }
-    // }
 
     // OPERASI OBE
     public static double[][] swapBaris(double[][] m, int idxRow1, int idxRow2){

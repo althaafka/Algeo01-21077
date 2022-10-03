@@ -1,13 +1,4 @@
 public class DeterminanGJ extends Matrix {
-    public static void main(String[] args) {
-        // double[][] m;
-        // m = createMatrix(10, 10);
-        // System.out.println(nBaris(m));
-        // System.out.println(nKolom(m));
-        // m = bacaMatrix();
-        // determiananGaussJordan (m);
-
-    }
 
     public static double determiananGaussJordan (double[][] m)
     {

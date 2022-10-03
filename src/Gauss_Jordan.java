@@ -2,13 +2,8 @@ import java.util.Arrays;
 
 public class Gauss_Jordan extends Matrix{
 
-    public static void main(String[] args){
-        double[][] m;
-        int[] a = new int[]{-1,-1};
-        int[] b;
-        
-    }
     public static int[] nextPivot (double[][] m, int[] pivot){
+        // Mengembalikan index leading one berikutnya
         int [] idx = new int[] {-1,-1};
         for (int j = pivot[1]+1; j<nKolom(m);j++){
             for (int i = pivot[0]+1; i<nBaris(m);i++){
@@ -22,6 +17,7 @@ public class Gauss_Jordan extends Matrix{
         return idx;
     }
     public static double[][] eselonBaris(double[][] m){
+        // Mengembembalikan matrix yang merupakan matrix eselon baris dari m yang telah diubah dengan OBE
         int [] pivot = new int[] {-1,-1};
 
         for (int i = 0; i < nBaris(m); i++){
@@ -47,7 +43,9 @@ public class Gauss_Jordan extends Matrix{
         }
         return m;
     }
+
     public static double[][] eselonBarisTereduksi(double[][] m){
+        // Mengembembalikan matrix yang merupakan matrix eselon baris tereduksi dari m yang telah diubah dengan OBE
         int [] pivot = new int[] {-1,-1};
         m = Gauss.eselonBaris(m);
         for(int i=0; i< nBaris(m); i++){

@@ -8,19 +8,8 @@ public class Crammer extends Matrix {
         int i,j,k,l;
         m3 = createMatrix(nBaris(m2),nKolom(m2)*nKolom(m2));
         temp = createMatrix(10, 10);
-        //System.out.println("Untuk matriks utama");
-        //System.out.println(nBaris(m2));
-        //System.out.println(nKolom(m2));
-        //m2 = bacaMatrix();
-
-        //System.out.println("Untuk matriks hasil");
-        //System.out.println(nBaris(m1));
-        //System.out.println(nKolom(m1));
-        //m1 = bacaMatrix();
 
         
-        
-
         //Deklarasi array untuk menyimpan nilai sebelumnya 
         Double[] nilaisebelumnya = new Double[nBaris(m2)];
         //Deklarasi array untuk menyimpan nilai-nilai determinan 
@@ -71,16 +60,7 @@ public class Crammer extends Matrix {
         
     }
 
-    public static void main(String[] args) {
-        double[][] m1,m2,m3;
 
-        m1 = bacaMatrix();
-        m2 = AugmentedtoSquare(m1);
-        m3 = augmentedtoKoef(m1);
-
-        crammerhasil(m2,m3);
-        
-    }
 }
 
 

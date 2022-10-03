@@ -2,23 +2,9 @@ import java.util.Arrays;
 
 public class SPLSolver extends Matrix {
 
-    public static void main (String args[]){
-        // double[] a = new double[] {1,0,0};
-        // double[] b = new double[] {3,2,0};
-        // double[] c = new double[] {0,0,0};
-        // double x = -2;
-        // // c = addArr(a, b);
-        // for (int i = 0; i<c.length; i++){
-        //     c[i] = a[i]+b[i];
-        // }
-        // System.out.println(Arrays.toString(a));
-        // System.out.println(Arrays.toString(c));
-        
 
-
-
-    }
     public static int whatSolution(double[][] m){
+        // Mengembalikan apakah matriks m merupakan SPL solusi unik, solusi tak hingga atau tidak bersolusi
         // Jika jumlah persamaan lebih sedikit dari jumlah variabel
         if ((nBaris(m) < nKolom(m)-1) || isRowZero(m, nBaris(m)-1)) return 2;
         // boolean noSolution = true;
@@ -160,29 +146,6 @@ public class SPLSolver extends Matrix {
             for (int i = 0; i<result.length;i++){
                 System.out.println(result[i]);
             }
-            // char var = 's';
-            // boolean first;
-            // for (int i=0; i<nBaris(result); i++){
-            //     System.out.print("X"+(i+1)+ " = ");
-            //     first = true;
-            //     for (int j=0; j<nKolom(result); j++){
-            //         if (!isZero(result[i][j])){
-            //             if (j==0){
-            //                 System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
-            //                 first = false;
-            //             } else if (j==nKolom(result)-1){
-            //                 if (!first) System.out.print(" + ");
-            //                 System.out.print(result[i][j]);
-            //                 first = false;
-            //             } else{
-            //                 if (!first) System.out.print(" + ");
-            //                 System.out.print("("+ result[i][j] +")"+ Character.toString((char)((int)(var+j))));
-            //                 first = false;
-            //             }
-            //         }
-            //     }
-            //     System.out.println();
-            // }
         }
 
         public static String[] infiniteSol2Arr(double[][] result){
